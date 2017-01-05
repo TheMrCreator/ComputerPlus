@@ -14,77 +14,37 @@ using LSPD_First_Response.Engine.Scripting.Entities;
 using Gwen.ControlInternal;
 using System.Media;
 using System.Drawing;
+using ComputerPlus.Interfaces.ComputerReports;
 
 namespace ComputerPlus
 {
     internal class FIEnvironmentCode : GwenForm
     {
         DateTime BDay;
-        Persona PedPersona;
-        Persona PedPersona1;
-        Persona PedPersona2;
-        Persona PedPersona3;
-        Persona PedPersona4;
-        string PedName1;
-        string PedName2;
-        string PedName3;
-        string PedName4;
-        string PedName5;
-        public string FirstName;
-        public string LastName;
+        Persona PedPersona, PedPersona1, PedPersona2, PedPersona3, PedPersona4;
+        string PedName1, PedName2, PedName3, PedName4, PedName5;
+        public string FirstName, LastName;
         private Vector3 CurrentLocation;
 
+        private bool ComboBox = false;
 
-        // Housekeeping
-        private Label FiskeyLabel;
-        private Label MDTLabel2;
-        private Label MenuLabel1;
-        private Label MenuLabel2;
-        private Label MenuLabel3;
-        private Label MenuLabel4;
-        private Label MenuLabel5;
-        private ProgressBar ProgressBar;
+        private PedData _susData;
+        
         public static GameFiber form_fipersonal = new GameFiber(OpenFIPersonalForm);
+        
+        private Label FIInfo, FIEnvironment, FIDate, FITime, FILocation, FICounty,
+            FIOfficerNumber, FIOfficerName, SuspectLast, SuspectFirst;
 
-        /// <summary>
-        /// FI Section
-        /// </summary>
-        // Labels
-        private Label FIInfo;
-        private Label FIEnvironment;
-        private Label FIDate;
-        private Label FITime;
-        private Label FILocation;
-        private Label FICounty;
-        private Label FIOfficerNumber;
-        private Label FIOfficerName;
-        private Label SuspectLast;
-        private Label SuspectFirst;
-        private Label CurrentStoppedLabel;
-        private Label CurrentStreet;
-        // Boxes
-        private TextBox FIDateBox;
-        private TextBox FITimeBox;
-        private TextBox FILocationBox;
-        private TextBox FICountyBox;
-        private TextBox FIOfficerNumberBox;
-        private TextBox FIOfficerNameBox;
-        public TextBox SuspectLastBox;
-        public TextBox SuspectFirstBox;
-        private TextBox CurrentStoppedBox1;
-        private TextBox CurrentStoppedBox2;
-        private TextBox CurrentStoppedBox3;
-        private TextBox CurrentStoppedBox4;
-        private TextBox CurrentStreetBox;
-        // Buttons
-        private Button FIContinueButton;
-        private Button FIBackButton;
+        private TextBox FIDateBox, FITimeBox, FILocationBox, FICountyBox, FIOfficerNumberBox, FIOfficerNameBox, first_box, last_box;
+
+        private Button FIContinueButton, FIBackButton;
+        private ComboBox combo_last, combo_first;
+
+        private bool isPullover = false;
 
         public FIEnvironmentCode()
             : base(typeof(FIEnvironmentForm))
-        {
-
-        }
+        {  }
 
         public override void InitializeLayout()
         {
@@ -93,135 +53,237 @@ namespace ComputerPlus
                 base.InitializeLayout();
                 Game.LogTrivial("Initializing FI Environment");
                 this.Position = new Point(Game.Resolution.Width / 2 - this.Window.Width / 2, Game.Resolution.Height / 2 - this.Window.Height / 2);
-                FIContinueButton.Clicked += OnFIContinueButtonClick;
-                FIBackButton.Clicked += OnFIBackButtonClick;
-                FIDateBox.Text = DateTime.Now.ToShortDateString();
-                FITimeBox.Text = DateTime.Now.ToShortTimeString();
-                FIOfficerNameBox.Text = Configs.OfficerName;
-                FIOfficerNumberBox.Text = Configs.OfficerNumber;
 
-                CurrentLocation = Game.LocalPlayer.Character.Position;
-                string currentstreet = Rage.World.GetStreetName(CurrentLocation);
-                FILocationBox.Text = currentstreet;
-                CurrentStreetBox.Text = currentstreet;
+                MethodStart();
+
+                HideStuff();
+
+                FillBoxes();
+                
                 PedCheck();
+
+                if (!ComboBox)
+                {
+                    NoComboBox();
+                }
 
                 GameFiber.Yield();
             });
         }
 
-        internal void PedCheck()
+        private void MethodStart()
+        {
+            FIContinueButton.Clicked += OnFIContinueButtonClick;
+            FIBackButton.Clicked += OnFIBackButtonClick;
+            combo_last.ItemSelected += UpdateCombo;
+            combo_first.ItemSelected += UpdateCombo;
+        }
+
+        private void HideStuff()
+        {
+            combo_first.Hide();
+            combo_last.Hide();
+            first_box.Hide();
+            last_box.Hide();
+        }
+
+        private void FillBoxes()
+        {
+            FIDateBox.Text = DateTime.Now.ToShortDateString();
+            FITimeBox.Text = DateTime.Now.ToShortTimeString();
+            FIOfficerNameBox.Text = Configs.OfficerName;
+            FIOfficerNumberBox.Text = Configs.OfficerNumber;
+            CurrentLocation = Game.LocalPlayer.Character.Position;
+            string currentstreet = Rage.World.GetStreetName(CurrentLocation);
+            FILocationBox.Text = currentstreet;
+            FICountyBox.Text = GetCounty();
+        }
+
+        private string GetCounty()
+        {
+            string county = "";
+
+            Vector3 pos = Game.LocalPlayer.Character.Position;
+
+            if (Rage.Native.NativeFunction.CallByName<uint>("GET_HASH_OF_MAP_AREA_AT_COORDS", pos.X, pos.Y, pos.Z) == Game.GetHashKey("city"))
+            {
+                county = "Los Santos County";
+            }
+            else
+            {
+                county = "Blaine County";
+            }
+            return county;
+        }
+
+        private void PedCheck()
         {
             if (Functions.IsPlayerPerformingPullover() == true)
             {
+                isPullover = true;
                 LHandle pullover = Functions.GetCurrentPullover();
                 Ped pulloverped = Functions.GetPulloverSuspect(pullover);
                 if (pulloverped.Exists())
                 {
                     Persona pers = Functions.GetPersonaForPed(pulloverped);
-                    PedPersona1 = pers;
-                    FirstName = pers.Forename;
-                    LastName = pers.Surname;
-                    SuspectLastBox.Text = LastName;
-                    SuspectFirstBox.Text = FirstName;
-                    CurrentStoppedBox1.Text = pers.FullName;
+                    _susData = new PedData(pulloverped);
+                    combo_first.AddItem(_susData.Sus_Persona.Forename.ToString(), _susData.Sus_Persona.Forename.ToString());
+                    combo_last.AddItem(_susData.Sus_Persona.Surname.ToString(), _susData.Sus_Persona.Surname.ToString());
+                    combo_first.Show();
+                    combo_last.Show();
+                    ComboBox = true;
                 }
             }
 
-            foreach (Ped ped in World.GetAllPeds())
+            if (!isPullover)
             {
-                if (ped.Exists())
+                foreach (Ped ped in World.GetAllPeds())
                 {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true)
+                    if (ped.Exists())
                     {
-                        PedPersona1 = pers;
-                        PedName1 = pers.FullName;
-                        CurrentStoppedBox1.Text = PedName1;
-                    }
-                }
-            }
-            foreach (Ped ped in World.GetAllPeds())
-            {
-                if (ped.Exists())
-                {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true && pers.FullName != PedPersona1.FullName)
-                    {
-                        PedPersona2 = pers;
-                        PedName2 = pers.FullName;
-                        CurrentStoppedBox2.Text = PedName2;
-                    }
-                }
-            }
-            foreach (Ped ped in World.GetAllPeds())
-            {
-                if (ped.Exists())
-                {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true && pers.FullName != PedPersona1.FullName && pers.FullName != PedPersona2.FullName)
-                    {
-                        PedPersona3 = pers;
-                        PedName3 = pers.FullName;
-                        CurrentStoppedBox3.Text = PedName3;
-                    }
-                }
-            }
-            foreach (Ped ped in World.GetAllPeds())
-            {
-                if (ped.Exists())
-                {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true && pers.FullName != PedPersona1.FullName && pers.FullName != PedPersona2.FullName && pers.FullName != PedPersona3.FullName)
-                    {
-                        PedPersona4 = pers;
-                        PedName4 = pers.FullName;
-                        CurrentStoppedBox4.Text = PedName4;
+                        Persona pers = Functions.GetPersonaForPed(ped);
+                        if (Functions.IsPedStoppedByPlayer(ped) == true)
+                        {
+                            PedPersona1 = pers;
+                            combo_first.AddItem(pers.Forename.ToString(), pers.Forename.ToString());
+                            combo_last.AddItem(pers.Surname.ToString(), pers.Surname.ToString());
+                            combo_first.Show();
+                            combo_last.Show();
+                            ComboBox = true;
+                        }
                     }
                 }
             }
         }
 
-        internal void OnFIContinueButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
+        private void NoComboBox()
         {
-            GameFiber.StartNew(delegate
+            first_box.Show();
+            last_box.Show();
+        }
+
+        #region Button_Methods
+        private void UpdateCombo(Base sender, ItemSelectedEventArgs e)
+        {
+            foreach (Ped ped in World.GetAllPeds())
             {
-                Game.DisplayNotification("Page 1 of 3 saved. Continuing Field Interaction form...");
-                using (StreamWriter Information = new StreamWriter("Plugins/LSPDFR/ComputerPlus/field interviews/" + SuspectLastBox.Text.ToLower() + SuspectFirstBox.Text.ToLower() + ".txt", true))
+                if (ped.Exists())
                 {
-                    // 8 Lines
-                    Information.WriteLine(" ");
-                    Information.WriteLine(" ");
-                    Information.WriteLine("---ENVIRONMENT---");
-                    Information.WriteLine("Date: " + FIDateBox.Text);
-                    Information.WriteLine("Time: " + FITimeBox.Text);
-                    Information.WriteLine("Location: " + FILocation.Text);
-                    Information.WriteLine("Officer Name and Number: " + FIOfficerNameBox.Text + " " + FIOfficerNumberBox.Text);
-                    Information.WriteLine("Individual Full Name: " + SuspectFirstBox.Text + " " + SuspectLastBox.Text);
+                    Persona pers = Functions.GetPersonaForPed(ped);
+                    if (sender == combo_last)
+                    {
+                        if (pers.Surname.ToLower() == combo_last.SelectedItem.Text.ToLower())
+                        {
+                            Game.LogTrivial("Match found -- changing first name");
+                            combo_first.Text = pers.Forename;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (pers.Forename.ToLower() == combo_first.SelectedItem.Text.ToLower())
+                        {
+                            Game.LogTrivial("Match found -- changing last name");
+                            combo_last.Text = pers.Surname;
+                            break;
+                        }
+                    }
                 }
-                Game.LogTrivial("Successfully written to .txt");
-            });
+            }
+        }
+
+        private void OnFIBackButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
+        {
+            this.Window.Close();
+        }
+
+        private void OnFIContinueButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
+        {
+            WriteData();
+
+            if (!isPullover)
+            {
+                SusDataCheck();
+            }
+
+            Carryover.CarryOverData(_susData);
 
             this.Window.Close();
             form_fipersonal = new GameFiber(OpenFIPersonalForm);
             form_fipersonal.Start();
         }
+        #endregion
 
-        internal static void OpenFIPersonalForm()
+        private void WriteData()
+        {
+            using (StreamWriter Information = new StreamWriter("Plugins/LSPDFR/ComputerPlus/field interviews/" + combo_last.Text.ToLower() + combo_first.Text.ToLower() + ".txt", true))
+            {
+                // 8 Lines
+                Information.WriteLine(" ");
+                Information.WriteLine(" ");
+                Information.WriteLine("---ENVIRONMENT---");
+                Information.WriteLine("Date: " + FIDateBox.Text);
+                Information.WriteLine("Time: " + FITimeBox.Text);
+                Information.WriteLine("Location: " + FILocationBox.Text);
+                Information.WriteLine("Officer Name and Number: " + FIOfficerNameBox.Text + " " + FIOfficerNumberBox.Text);
+                if (!ComboBox)
+                {
+                    Information.WriteLine("Individual Full Name: " + first_box.Text + " " + last_box.Text);
+                }
+                else
+                {
+                    Information.WriteLine("Individual Full Name: " + combo_first.Text + " " + combo_last.Text);
+                }
+            }
+            Game.LogTrivial("Successfully written to .txt");
+        }
+
+        private bool susFound = false;
+
+        private void SusDataCheck()
+        {
+            foreach (Ped ped in World.GetAllPeds())
+            {
+                if (ped.Exists())
+                {
+                    Persona pers = Functions.GetPersonaForPed(ped);
+                    if (ComboBox)
+                    {
+                        if (pers.Forename.ToLower() == combo_first.Text.ToLower() && pers.Surname.ToLower() == combo_last.Text.ToLower())
+                        {
+                            Game.LogTrivial("ComboBox ped matched");
+                            _susData = new PedData(ped);
+                            susFound = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (pers.FullName.ToLower() == first_box.Text.ToLower() + " " + last_box.Text.ToLower())
+                        {
+                            Game.LogTrivial("Textbox ped matched");
+                            _susData = new PedData(ped);
+                            susFound = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!susFound)
+            {
+                Game.LogTrivial("No ped matched");
+                _susData = new PedData();
+                _susData.FirstName = first_box.Text;
+                _susData.LastName = last_box.Text;
+            }
+        }
+
+        private static void OpenFIPersonalForm()
         {
             GwenForm FIPersonal = new FIPersonalInfoCode();
             FIPersonal.Show();
             while (FIPersonal.Window.IsVisible)
                 GameFiber.Yield();
         }
-
-        internal void OnFIBackButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
-        {
-            this.Window.Close();
-            ComputerMain.form_report = new GameFiber(ComputerMain.OpenReportMenuForm);
-            ComputerMain.form_report.Start();
-        }
-
-
     }
 }

@@ -28,30 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MDTLabel2 = new System.Windows.Forms.Label();
             this.FiskeyLabel = new System.Windows.Forms.Label();
-            this.SuspectLastBox = new System.Windows.Forms.TextBox();
-            this.MenuLabel1 = new System.Windows.Forms.Label();
-            this.MenuLabel2 = new System.Windows.Forms.Label();
-            this.MenuLabel3 = new System.Windows.Forms.Label();
-            this.MenuLabel4 = new System.Windows.Forms.Label();
-            this.MenuLabel5 = new System.Windows.Forms.Label();
             this.FIInfo = new System.Windows.Forms.Label();
             this.FIPersonalInfo = new System.Windows.Forms.Label();
-            this.FITotalBox = new System.Windows.Forms.TextBox();
             this.CreditLabel = new System.Windows.Forms.Label();
             this.ShowFIButton = new System.Windows.Forms.Button();
             this.FIBox = new System.Windows.Forms.TextBox();
             this.SuspectLast = new System.Windows.Forms.Label();
             this.SuspectFirst = new System.Windows.Forms.Label();
-            this.SuspectFirstBox = new System.Windows.Forms.TextBox();
             this.SuspectDOB = new System.Windows.Forms.Label();
             this.SuspectDOBBox = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedBox4 = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedBox3 = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedBox2 = new System.Windows.Forms.TextBox();
-            this.CurrentStopped = new System.Windows.Forms.Label();
-            this.CurrentStoppedBox1 = new System.Windows.Forms.TextBox();
             this.SuspectSSN = new System.Windows.Forms.Label();
             this.SuspectSSNBox = new System.Windows.Forms.TextBox();
             this.SuspectOcupation = new System.Windows.Forms.Label();
@@ -78,22 +64,12 @@
             this.SuspectPlateBox = new System.Windows.Forms.TextBox();
             this.SuspectVehicle = new System.Windows.Forms.Label();
             this.SuspectVehicleBox = new System.Windows.Forms.TextBox();
-            this.FIBackButton = new System.Windows.Forms.Button();
-            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Wanted = new System.Windows.Forms.Label();
+            this.first_box = new System.Windows.Forms.TextBox();
+            this.last_box = new System.Windows.Forms.TextBox();
+            this.FIBackButton = new System.Windows.Forms.Button();
+            this.FITotalLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // MDTLabel2
-            // 
-            this.MDTLabel2.AutoSize = true;
-            this.MDTLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MDTLabel2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.MDTLabel2.Location = new System.Drawing.Point(4, 4);
-            this.MDTLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.MDTLabel2.Name = "MDTLabel2";
-            this.MDTLabel2.Size = new System.Drawing.Size(110, 40);
-            this.MDTLabel2.TabIndex = 17;
-            this.MDTLabel2.Text = "MDT V0.0.3.0 \r\nLSPD/LSSD";
             // 
             // FiskeyLabel
             // 
@@ -107,70 +83,6 @@
             this.FiskeyLabel.Size = new System.Drawing.Size(198, 12);
             this.FiskeyLabel.TabIndex = 49;
             this.FiskeyLabel.Text = "Created by Fiskey111 -- LCPDFR.com";
-            // 
-            // SuspectLastBox
-            // 
-            this.SuspectLastBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.SuspectLastBox.Location = new System.Drawing.Point(185, 178);
-            this.SuspectLastBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SuspectLastBox.Name = "SuspectLastBox";
-            this.SuspectLastBox.Size = new System.Drawing.Size(187, 21);
-            this.SuspectLastBox.TabIndex = 29;
-            // 
-            // MenuLabel1
-            // 
-            this.MenuLabel1.AutoSize = true;
-            this.MenuLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel1.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel1.Location = new System.Drawing.Point(108, 3);
-            this.MenuLabel1.Name = "MenuLabel1";
-            this.MenuLabel1.Size = new System.Drawing.Size(45, 17);
-            this.MenuLabel1.TabIndex = 100;
-            this.MenuLabel1.Text = "Home";
-            // 
-            // MenuLabel2
-            // 
-            this.MenuLabel2.AutoSize = true;
-            this.MenuLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel2.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel2.Location = new System.Drawing.Point(159, 3);
-            this.MenuLabel2.Name = "MenuLabel2";
-            this.MenuLabel2.Size = new System.Drawing.Size(53, 17);
-            this.MenuLabel2.TabIndex = 101;
-            this.MenuLabel2.Text = "Search";
-            // 
-            // MenuLabel3
-            // 
-            this.MenuLabel3.AutoSize = true;
-            this.MenuLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel3.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel3.Location = new System.Drawing.Point(218, 3);
-            this.MenuLabel3.Name = "MenuLabel3";
-            this.MenuLabel3.Size = new System.Drawing.Size(114, 17);
-            this.MenuLabel3.TabIndex = 102;
-            this.MenuLabel3.Text = "Reports- Citation";
-            // 
-            // MenuLabel4
-            // 
-            this.MenuLabel4.AutoSize = true;
-            this.MenuLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel4.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel4.Location = new System.Drawing.Point(338, 3);
-            this.MenuLabel4.Name = "MenuLabel4";
-            this.MenuLabel4.Size = new System.Drawing.Size(105, 17);
-            this.MenuLabel4.TabIndex = 103;
-            this.MenuLabel4.Text = "Reports- Arrest";
-            // 
-            // MenuLabel5
-            // 
-            this.MenuLabel5.AutoSize = true;
-            this.MenuLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel5.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.MenuLabel5.Location = new System.Drawing.Point(449, 4);
-            this.MenuLabel5.Name = "MenuLabel5";
-            this.MenuLabel5.Size = new System.Drawing.Size(144, 17);
-            this.MenuLabel5.TabIndex = 104;
-            this.MenuLabel5.Text = "Field Interview Report";
             // 
             // FIInfo
             // 
@@ -197,15 +109,6 @@
             this.FIPersonalInfo.Size = new System.Drawing.Size(130, 16);
             this.FIPersonalInfo.TabIndex = 115;
             this.FIPersonalInfo.Text = "Personal Information";
-            // 
-            // FITotalBox
-            // 
-            this.FITotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.FITotalBox.Location = new System.Drawing.Point(83, 220);
-            this.FITotalBox.Margin = new System.Windows.Forms.Padding(2);
-            this.FITotalBox.Name = "FITotalBox";
-            this.FITotalBox.Size = new System.Drawing.Size(98, 21);
-            this.FITotalBox.TabIndex = 118;
             // 
             // CreditLabel
             // 
@@ -266,15 +169,6 @@
             this.SuspectFirst.TabIndex = 132;
             this.SuspectFirst.Text = "Person First Name:";
             // 
-            // SuspectFirstBox
-            // 
-            this.SuspectFirstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.SuspectFirstBox.Location = new System.Drawing.Point(376, 178);
-            this.SuspectFirstBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SuspectFirstBox.Name = "SuspectFirstBox";
-            this.SuspectFirstBox.Size = new System.Drawing.Size(187, 21);
-            this.SuspectFirstBox.TabIndex = 131;
-            // 
             // SuspectDOB
             // 
             this.SuspectDOB.AutoSize = true;
@@ -295,54 +189,6 @@
             this.SuspectDOBBox.Name = "SuspectDOBBox";
             this.SuspectDOBBox.Size = new System.Drawing.Size(109, 21);
             this.SuspectDOBBox.TabIndex = 133;
-            // 
-            // CurrentStoppedBox4
-            // 
-            this.CurrentStoppedBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox4.Location = new System.Drawing.Point(615, 298);
-            this.CurrentStoppedBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox4.Name = "CurrentStoppedBox4";
-            this.CurrentStoppedBox4.Size = new System.Drawing.Size(158, 21);
-            this.CurrentStoppedBox4.TabIndex = 150;
-            // 
-            // CurrentStoppedBox3
-            // 
-            this.CurrentStoppedBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox3.Location = new System.Drawing.Point(615, 258);
-            this.CurrentStoppedBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox3.Name = "CurrentStoppedBox3";
-            this.CurrentStoppedBox3.Size = new System.Drawing.Size(158, 21);
-            this.CurrentStoppedBox3.TabIndex = 149;
-            // 
-            // CurrentStoppedBox2
-            // 
-            this.CurrentStoppedBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox2.Location = new System.Drawing.Point(615, 218);
-            this.CurrentStoppedBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox2.Name = "CurrentStoppedBox2";
-            this.CurrentStoppedBox2.Size = new System.Drawing.Size(158, 21);
-            this.CurrentStoppedBox2.TabIndex = 148;
-            // 
-            // CurrentStopped
-            // 
-            this.CurrentStopped.AutoSize = true;
-            this.CurrentStopped.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStopped.ForeColor = System.Drawing.Color.Blue;
-            this.CurrentStopped.Location = new System.Drawing.Point(591, 161);
-            this.CurrentStopped.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.CurrentStopped.Name = "CurrentStopped";
-            this.CurrentStopped.Size = new System.Drawing.Size(182, 16);
-            this.CurrentStopped.TabIndex = 147;
-            this.CurrentStopped.Text = "Currently Stopped Individuals";
-            // 
-            // CurrentStoppedBox1
-            // 
-            this.CurrentStoppedBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox1.Location = new System.Drawing.Point(615, 179);
-            this.CurrentStoppedBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox1.Name = "CurrentStoppedBox1";
-            this.CurrentStoppedBox1.Size = new System.Drawing.Size(158, 21);
-            this.CurrentStoppedBox1.TabIndex = 146;
             // 
             // SuspectSSN
             // 
@@ -620,28 +466,6 @@
             this.SuspectVehicleBox.Size = new System.Drawing.Size(222, 21);
             this.SuspectVehicleBox.TabIndex = 175;
             // 
-            // FIBackButton
-            // 
-            this.FIBackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.FIBackButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.FIBackButton.Location = new System.Drawing.Point(643, 25);
-            this.FIBackButton.Margin = new System.Windows.Forms.Padding(2);
-            this.FIBackButton.Name = "FIBackButton";
-            this.FIBackButton.Size = new System.Drawing.Size(130, 35);
-            this.FIBackButton.TabIndex = 179;
-            this.FIBackButton.Text = "Back to Previous";
-            this.FIBackButton.UseVisualStyleBackColor = true;
-            // 
-            // ProgressBar
-            // 
-            this.ProgressBar.Location = new System.Drawing.Point(341, 540);
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(196, 20);
-            this.ProgressBar.Step = 5;
-            this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.ProgressBar.TabIndex = 180;
-            this.ProgressBar.Value = 66;
-            // 
             // Wanted
             // 
             this.Wanted.AutoSize = true;
@@ -654,14 +478,58 @@
             this.Wanted.TabIndex = 181;
             this.Wanted.Text = "ACTIVE WARRANT FOR ARREST";
             // 
+            // first_box
+            // 
+            this.first_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.first_box.Location = new System.Drawing.Point(185, 181);
+            this.first_box.Margin = new System.Windows.Forms.Padding(2);
+            this.first_box.Name = "first_box";
+            this.first_box.Size = new System.Drawing.Size(187, 21);
+            this.first_box.TabIndex = 188;
+            // 
+            // last_box
+            // 
+            this.last_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.last_box.Location = new System.Drawing.Point(376, 181);
+            this.last_box.Margin = new System.Windows.Forms.Padding(2);
+            this.last_box.Name = "last_box";
+            this.last_box.Size = new System.Drawing.Size(187, 21);
+            this.last_box.TabIndex = 189;
+            // 
+            // FIBackButton
+            // 
+            this.FIBackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.FIBackButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.FIBackButton.Location = new System.Drawing.Point(643, 25);
+            this.FIBackButton.Margin = new System.Windows.Forms.Padding(2);
+            this.FIBackButton.Name = "FIBackButton";
+            this.FIBackButton.Size = new System.Drawing.Size(130, 35);
+            this.FIBackButton.TabIndex = 179;
+            this.FIBackButton.Text = "Back";
+            this.FIBackButton.UseVisualStyleBackColor = true;
+            // 
+            // FITotalLbl
+            // 
+            this.FITotalLbl.AutoSize = true;
+            this.FITotalLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.FITotalLbl.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.FITotalLbl.Location = new System.Drawing.Point(91, 221);
+            this.FITotalLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.FITotalLbl.Name = "FITotalLbl";
+            this.FITotalLbl.Size = new System.Drawing.Size(90, 15);
+            this.FITotalLbl.TabIndex = 190;
+            this.FITotalLbl.Text = "Press \"Lookup\"";
+            // 
             // FIPersonalInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.FITotalLbl);
+            this.Controls.Add(this.first_box);
+            this.Controls.Add(this.last_box);
             this.Controls.Add(this.Wanted);
-            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.FIBackButton);
             this.Controls.Add(this.SuspectPlate);
             this.Controls.Add(this.SuspectPlateBox);
@@ -688,30 +556,16 @@
             this.Controls.Add(this.SuspectOccupationBox);
             this.Controls.Add(this.SuspectSSN);
             this.Controls.Add(this.SuspectSSNBox);
-            this.Controls.Add(this.CurrentStoppedBox4);
-            this.Controls.Add(this.CurrentStoppedBox3);
-            this.Controls.Add(this.CurrentStoppedBox2);
-            this.Controls.Add(this.CurrentStopped);
-            this.Controls.Add(this.CurrentStoppedBox1);
             this.Controls.Add(this.SuspectDOB);
             this.Controls.Add(this.SuspectDOBBox);
             this.Controls.Add(this.SuspectFirst);
-            this.Controls.Add(this.SuspectFirstBox);
             this.Controls.Add(this.SuspectLast);
             this.Controls.Add(this.ShowFIButton);
             this.Controls.Add(this.CreditLabel);
-            this.Controls.Add(this.FITotalBox);
             this.Controls.Add(this.FILookupButton);
             this.Controls.Add(this.FIPersonalInfo);
             this.Controls.Add(this.FIInfo);
-            this.Controls.Add(this.MenuLabel5);
-            this.Controls.Add(this.MenuLabel4);
-            this.Controls.Add(this.MenuLabel3);
-            this.Controls.Add(this.MenuLabel2);
-            this.Controls.Add(this.MenuLabel1);
             this.Controls.Add(this.FiskeyLabel);
-            this.Controls.Add(this.MDTLabel2);
-            this.Controls.Add(this.SuspectLastBox);
             this.Controls.Add(this.FIBox);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
@@ -726,30 +580,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label MDTLabel2;
         private System.Windows.Forms.Label FiskeyLabel;
-        private System.Windows.Forms.TextBox SuspectLastBox;
-        private System.Windows.Forms.Label MenuLabel1;
-        private System.Windows.Forms.Label MenuLabel2;
-        private System.Windows.Forms.Label MenuLabel3;
-        private System.Windows.Forms.Label MenuLabel4;
-        private System.Windows.Forms.Label MenuLabel5;
         private System.Windows.Forms.Label FIInfo;
         private System.Windows.Forms.Label FIPersonalInfo;
-        private System.Windows.Forms.TextBox FITotalBox;
         private System.Windows.Forms.Label CreditLabel;
         private System.Windows.Forms.Button ShowFIButton;
         private System.Windows.Forms.TextBox FIBox;
         private System.Windows.Forms.Label SuspectLast;
         private System.Windows.Forms.Label SuspectFirst;
-        private System.Windows.Forms.TextBox SuspectFirstBox;
         private System.Windows.Forms.Label SuspectDOB;
         private System.Windows.Forms.TextBox SuspectDOBBox;
-        private System.Windows.Forms.TextBox CurrentStoppedBox4;
-        private System.Windows.Forms.TextBox CurrentStoppedBox3;
-        private System.Windows.Forms.TextBox CurrentStoppedBox2;
-        private System.Windows.Forms.Label CurrentStopped;
-        private System.Windows.Forms.TextBox CurrentStoppedBox1;
         private System.Windows.Forms.Label SuspectSSN;
         private System.Windows.Forms.TextBox SuspectSSNBox;
         private System.Windows.Forms.Label SuspectOcupation;
@@ -776,8 +616,10 @@
         private System.Windows.Forms.TextBox SuspectPlateBox;
         private System.Windows.Forms.Label SuspectVehicle;
         private System.Windows.Forms.TextBox SuspectVehicleBox;
-        private System.Windows.Forms.Button FIBackButton;
-        private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.Label Wanted;
+        private System.Windows.Forms.TextBox first_box;
+        private System.Windows.Forms.TextBox last_box;
+        private System.Windows.Forms.Button FIBackButton;
+        private System.Windows.Forms.Label FITotalLbl;
     }
 }

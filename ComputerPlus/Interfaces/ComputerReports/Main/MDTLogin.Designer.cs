@@ -33,13 +33,12 @@
             this.ReportArrest = new System.Windows.Forms.Button();
             this.FIButton = new System.Windows.Forms.Button();
             this.InfoLabel1 = new System.Windows.Forms.Label();
-            this.PoliceNotebook = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // HomeButton
             // 
             this.HomeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.HomeButton.Location = new System.Drawing.Point(531, 156);
+            this.HomeButton.Location = new System.Drawing.Point(460, 155);
             this.HomeButton.Margin = new System.Windows.Forms.Padding(2);
             this.HomeButton.Name = "HomeButton";
             this.HomeButton.Size = new System.Drawing.Size(125, 30);
@@ -51,7 +50,7 @@
             // ReportCitation
             // 
             this.ReportCitation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.ReportCitation.Location = new System.Drawing.Point(12, 157);
+            this.ReportCitation.Location = new System.Drawing.Point(70, 155);
             this.ReportCitation.Name = "ReportCitation";
             this.ReportCitation.Size = new System.Drawing.Size(125, 30);
             this.ReportCitation.TabIndex = 115;
@@ -61,17 +60,17 @@
             // ReportArrest
             // 
             this.ReportArrest.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.ReportArrest.Location = new System.Drawing.Point(143, 157);
+            this.ReportArrest.Location = new System.Drawing.Point(201, 155);
             this.ReportArrest.Name = "ReportArrest";
             this.ReportArrest.Size = new System.Drawing.Size(125, 30);
             this.ReportArrest.TabIndex = 116;
-            this.ReportArrest.Text = "Arrest Report - WIP";
+            this.ReportArrest.Text = "Arrest Report";
             this.ReportArrest.UseVisualStyleBackColor = true;
             // 
             // FIButton
             // 
             this.FIButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.FIButton.Location = new System.Drawing.Point(273, 156);
+            this.FIButton.Location = new System.Drawing.Point(331, 155);
             this.FIButton.Margin = new System.Windows.Forms.Padding(2);
             this.FIButton.Name = "FIButton";
             this.FIButton.Size = new System.Drawing.Size(125, 30);
@@ -92,25 +91,12 @@
             this.InfoLabel1.TabIndex = 118;
             this.InfoLabel1.Text = "Welcome to the report writing system.  Please select a report below!";
             // 
-            // PoliceNotebook
-            // 
-            this.PoliceNotebook.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.PoliceNotebook.Location = new System.Drawing.Point(402, 156);
-            this.PoliceNotebook.Margin = new System.Windows.Forms.Padding(2);
-            this.PoliceNotebook.Name = "PoliceNotebook";
-            this.PoliceNotebook.Size = new System.Drawing.Size(125, 30);
-            this.PoliceNotebook.TabIndex = 124;
-            this.PoliceNotebook.TabStop = false;
-            this.PoliceNotebook.Text = "Police Notebook";
-            this.PoliceNotebook.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(667, 197);
-            this.Controls.Add(this.PoliceNotebook);
             this.Controls.Add(this.InfoLabel1);
             this.Controls.Add(this.FIButton);
             this.Controls.Add(this.ReportArrest);
@@ -134,6 +120,5 @@
         private System.Windows.Forms.Button ReportArrest;
         private System.Windows.Forms.Button FIButton;
         private System.Windows.Forms.Label InfoLabel1;
-        private System.Windows.Forms.Button PoliceNotebook;
     }
 }

@@ -28,35 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MenuLabel5 = new System.Windows.Forms.Label();
-            this.MenuLabel4 = new System.Windows.Forms.Label();
-            this.MenuLabel3 = new System.Windows.Forms.Label();
-            this.MenuLabel2 = new System.Windows.Forms.Label();
-            this.MenuLabel1 = new System.Windows.Forms.Label();
-            this.FiskeyLabel = new System.Windows.Forms.Label();
-            this.MDTLabel2 = new System.Windows.Forms.Label();
-            this.CitationAutoLookupButton = new System.Windows.Forms.Button();
             this.CitationContinueButton = new System.Windows.Forms.Button();
             this.CitationPerpStreetBox = new System.Windows.Forms.TextBox();
             this.CitationPerpDOBBox = new System.Windows.Forms.TextBox();
-            this.SuspectLastBox = new System.Windows.Forms.TextBox();
             this.CitationIssuedOfficerNameBox = new System.Windows.Forms.TextBox();
             this.CitationIssuedOfficerBox = new System.Windows.Forms.TextBox();
             this.CitationRelatedBox = new System.Windows.Forms.TextBox();
             this.CitationTimeBox = new System.Windows.Forms.TextBox();
             this.CitationDateBox = new System.Windows.Forms.TextBox();
             this.CitationNumberBox = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedLabel = new System.Windows.Forms.Label();
-            this.CurrentStoppedBox1 = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedBox2 = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedBox4 = new System.Windows.Forms.TextBox();
-            this.CurrentStoppedBox3 = new System.Windows.Forms.TextBox();
             this.CitationNumber = new System.Windows.Forms.Label();
             this.ReleatedReport = new System.Windows.Forms.Label();
             this.Date = new System.Windows.Forms.Label();
             this.Time = new System.Windows.Forms.Label();
             this.SuspectLast = new System.Windows.Forms.Label();
-            this.SuspectFirstBox = new System.Windows.Forms.TextBox();
             this.SuspectFirst = new System.Windows.Forms.Label();
             this.SuspectDOB = new System.Windows.Forms.Label();
             this.SuspectAddress = new System.Windows.Forms.Label();
@@ -64,105 +49,18 @@
             this.OfficerName = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.combo_last = new System.Windows.Forms.ComboBox();
+            this.combo_first = new System.Windows.Forms.ComboBox();
+            this.BackButton = new System.Windows.Forms.Button();
+            this.first_box = new System.Windows.Forms.TextBox();
+            this.last_box = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // MenuLabel5
-            // 
-            this.MenuLabel5.AutoSize = true;
-            this.MenuLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel5.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel5.Location = new System.Drawing.Point(454, 8);
-            this.MenuLabel5.Name = "MenuLabel5";
-            this.MenuLabel5.Size = new System.Drawing.Size(144, 17);
-            this.MenuLabel5.TabIndex = 143;
-            this.MenuLabel5.Text = "Field Interview Report";
-            // 
-            // MenuLabel4
-            // 
-            this.MenuLabel4.AutoSize = true;
-            this.MenuLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel4.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel4.Location = new System.Drawing.Point(343, 7);
-            this.MenuLabel4.Name = "MenuLabel4";
-            this.MenuLabel4.Size = new System.Drawing.Size(105, 17);
-            this.MenuLabel4.TabIndex = 142;
-            this.MenuLabel4.Text = "Reports- Arrest";
-            // 
-            // MenuLabel3
-            // 
-            this.MenuLabel3.AutoSize = true;
-            this.MenuLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.MenuLabel3.Location = new System.Drawing.Point(223, 7);
-            this.MenuLabel3.Name = "MenuLabel3";
-            this.MenuLabel3.Size = new System.Drawing.Size(114, 17);
-            this.MenuLabel3.TabIndex = 141;
-            this.MenuLabel3.Text = "Reports- Citation";
-            // 
-            // MenuLabel2
-            // 
-            this.MenuLabel2.AutoSize = true;
-            this.MenuLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel2.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel2.Location = new System.Drawing.Point(164, 7);
-            this.MenuLabel2.Name = "MenuLabel2";
-            this.MenuLabel2.Size = new System.Drawing.Size(53, 17);
-            this.MenuLabel2.TabIndex = 140;
-            this.MenuLabel2.Text = "Search";
-            // 
-            // MenuLabel1
-            // 
-            this.MenuLabel1.AutoSize = true;
-            this.MenuLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MenuLabel1.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.MenuLabel1.Location = new System.Drawing.Point(113, 7);
-            this.MenuLabel1.Name = "MenuLabel1";
-            this.MenuLabel1.Size = new System.Drawing.Size(45, 17);
-            this.MenuLabel1.TabIndex = 139;
-            this.MenuLabel1.Text = "Home";
-            // 
-            // FiskeyLabel
-            // 
-            this.FiskeyLabel.AutoSize = true;
-            this.FiskeyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
-                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.FiskeyLabel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.FiskeyLabel.Location = new System.Drawing.Point(580, 544);
-            this.FiskeyLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.FiskeyLabel.Name = "FiskeyLabel";
-            this.FiskeyLabel.Size = new System.Drawing.Size(198, 12);
-            this.FiskeyLabel.TabIndex = 127;
-            this.FiskeyLabel.Text = "Created by Fiskey111 -- LCPDFR.com";
-            // 
-            // MDTLabel2
-            // 
-            this.MDTLabel2.AutoSize = true;
-            this.MDTLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.MDTLabel2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.MDTLabel2.Location = new System.Drawing.Point(6, 5);
-            this.MDTLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.MDTLabel2.Name = "MDTLabel2";
-            this.MDTLabel2.Size = new System.Drawing.Size(106, 40);
-            this.MDTLabel2.TabIndex = 106;
-            this.MDTLabel2.Text = "MDT V0.0.3.0\r\nLSPD/LSSD";
-            // 
-            // CitationAutoLookupButton
-            // 
-            this.CitationAutoLookupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationAutoLookupButton.Location = new System.Drawing.Point(69, 230);
-            this.CitationAutoLookupButton.Margin = new System.Windows.Forms.Padding(2);
-            this.CitationAutoLookupButton.Name = "CitationAutoLookupButton";
-            this.CitationAutoLookupButton.Size = new System.Drawing.Size(82, 21);
-            this.CitationAutoLookupButton.TabIndex = 136;
-            this.CitationAutoLookupButton.Text = "Auto-Lookup";
-            this.CitationAutoLookupButton.UseVisualStyleBackColor = true;
-            this.CitationAutoLookupButton.Visible = false;
             // 
             // CitationContinueButton
             // 
             this.CitationContinueButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.CitationContinueButton.ForeColor = System.Drawing.Color.Blue;
-            this.CitationContinueButton.Location = new System.Drawing.Point(224, 335);
+            this.CitationContinueButton.Location = new System.Drawing.Point(291, 334);
             this.CitationContinueButton.Margin = new System.Windows.Forms.Padding(2);
             this.CitationContinueButton.Name = "CitationContinueButton";
             this.CitationContinueButton.Size = new System.Drawing.Size(246, 62);
@@ -173,43 +71,34 @@
             // CitationPerpStreetBox
             // 
             this.CitationPerpStreetBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationPerpStreetBox.Location = new System.Drawing.Point(252, 270);
+            this.CitationPerpStreetBox.Location = new System.Drawing.Point(291, 269);
             this.CitationPerpStreetBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationPerpStreetBox.Name = "CitationPerpStreetBox";
-            this.CitationPerpStreetBox.Size = new System.Drawing.Size(283, 21);
+            this.CitationPerpStreetBox.Size = new System.Drawing.Size(311, 21);
             this.CitationPerpStreetBox.TabIndex = 113;
             // 
             // CitationPerpDOBBox
             // 
             this.CitationPerpDOBBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationPerpDOBBox.Location = new System.Drawing.Point(156, 270);
+            this.CitationPerpDOBBox.Location = new System.Drawing.Point(195, 269);
             this.CitationPerpDOBBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationPerpDOBBox.Name = "CitationPerpDOBBox";
             this.CitationPerpDOBBox.Size = new System.Drawing.Size(92, 21);
             this.CitationPerpDOBBox.TabIndex = 112;
             // 
-            // SuspectLastBox
-            // 
-            this.SuspectLastBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.SuspectLastBox.Location = new System.Drawing.Point(155, 230);
-            this.SuspectLastBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SuspectLastBox.Name = "SuspectLastBox";
-            this.SuspectLastBox.Size = new System.Drawing.Size(206, 21);
-            this.SuspectLastBox.TabIndex = 111;
-            // 
             // CitationIssuedOfficerNameBox
             // 
             this.CitationIssuedOfficerNameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationIssuedOfficerNameBox.Location = new System.Drawing.Point(316, 310);
+            this.CitationIssuedOfficerNameBox.Location = new System.Drawing.Point(355, 309);
             this.CitationIssuedOfficerNameBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationIssuedOfficerNameBox.Name = "CitationIssuedOfficerNameBox";
-            this.CitationIssuedOfficerNameBox.Size = new System.Drawing.Size(219, 21);
+            this.CitationIssuedOfficerNameBox.Size = new System.Drawing.Size(247, 21);
             this.CitationIssuedOfficerNameBox.TabIndex = 115;
             // 
             // CitationIssuedOfficerBox
             // 
             this.CitationIssuedOfficerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationIssuedOfficerBox.Location = new System.Drawing.Point(156, 310);
+            this.CitationIssuedOfficerBox.Location = new System.Drawing.Point(195, 309);
             this.CitationIssuedOfficerBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationIssuedOfficerBox.Name = "CitationIssuedOfficerBox";
             this.CitationIssuedOfficerBox.Size = new System.Drawing.Size(156, 21);
@@ -218,7 +107,7 @@
             // CitationRelatedBox
             // 
             this.CitationRelatedBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationRelatedBox.Location = new System.Drawing.Point(252, 190);
+            this.CitationRelatedBox.Location = new System.Drawing.Point(291, 189);
             this.CitationRelatedBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationRelatedBox.Name = "CitationRelatedBox";
             this.CitationRelatedBox.Size = new System.Drawing.Size(109, 21);
@@ -228,84 +117,36 @@
             // CitationTimeBox
             // 
             this.CitationTimeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationTimeBox.Location = new System.Drawing.Point(459, 190);
+            this.CitationTimeBox.Location = new System.Drawing.Point(513, 189);
             this.CitationTimeBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationTimeBox.Name = "CitationTimeBox";
-            this.CitationTimeBox.Size = new System.Drawing.Size(76, 21);
+            this.CitationTimeBox.Size = new System.Drawing.Size(89, 21);
             this.CitationTimeBox.TabIndex = 110;
             // 
             // CitationDateBox
             // 
             this.CitationDateBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationDateBox.Location = new System.Drawing.Point(365, 190);
+            this.CitationDateBox.Location = new System.Drawing.Point(404, 189);
             this.CitationDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationDateBox.Name = "CitationDateBox";
-            this.CitationDateBox.Size = new System.Drawing.Size(90, 21);
+            this.CitationDateBox.Size = new System.Drawing.Size(105, 21);
             this.CitationDateBox.TabIndex = 109;
             // 
             // CitationNumberBox
             // 
             this.CitationNumberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CitationNumberBox.Location = new System.Drawing.Point(156, 190);
+            this.CitationNumberBox.Location = new System.Drawing.Point(195, 189);
             this.CitationNumberBox.Margin = new System.Windows.Forms.Padding(2);
             this.CitationNumberBox.Name = "CitationNumberBox";
             this.CitationNumberBox.Size = new System.Drawing.Size(93, 21);
             this.CitationNumberBox.TabIndex = 107;
-            // 
-            // CurrentStoppedLabel
-            // 
-            this.CurrentStoppedLabel.AutoSize = true;
-            this.CurrentStoppedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.CurrentStoppedLabel.Location = new System.Drawing.Point(572, 173);
-            this.CurrentStoppedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.CurrentStoppedLabel.Name = "CurrentStoppedLabel";
-            this.CurrentStoppedLabel.Size = new System.Drawing.Size(149, 15);
-            this.CurrentStoppedLabel.TabIndex = 147;
-            this.CurrentStoppedLabel.Text = "Current Suspects Stopped";
-            // 
-            // CurrentStoppedBox1
-            // 
-            this.CurrentStoppedBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox1.Location = new System.Drawing.Point(575, 190);
-            this.CurrentStoppedBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox1.Name = "CurrentStoppedBox1";
-            this.CurrentStoppedBox1.Size = new System.Drawing.Size(170, 21);
-            this.CurrentStoppedBox1.TabIndex = 148;
-            // 
-            // CurrentStoppedBox2
-            // 
-            this.CurrentStoppedBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox2.Location = new System.Drawing.Point(575, 229);
-            this.CurrentStoppedBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox2.Name = "CurrentStoppedBox2";
-            this.CurrentStoppedBox2.Size = new System.Drawing.Size(170, 21);
-            this.CurrentStoppedBox2.TabIndex = 149;
-            // 
-            // CurrentStoppedBox4
-            // 
-            this.CurrentStoppedBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox4.Location = new System.Drawing.Point(575, 310);
-            this.CurrentStoppedBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox4.Name = "CurrentStoppedBox4";
-            this.CurrentStoppedBox4.Size = new System.Drawing.Size(170, 21);
-            this.CurrentStoppedBox4.TabIndex = 151;
-            // 
-            // CurrentStoppedBox3
-            // 
-            this.CurrentStoppedBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.CurrentStoppedBox3.Location = new System.Drawing.Point(575, 270);
-            this.CurrentStoppedBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.CurrentStoppedBox3.Name = "CurrentStoppedBox3";
-            this.CurrentStoppedBox3.Size = new System.Drawing.Size(170, 21);
-            this.CurrentStoppedBox3.TabIndex = 150;
             // 
             // CitationNumber
             // 
             this.CitationNumber.AutoSize = true;
             this.CitationNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.CitationNumber.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.CitationNumber.Location = new System.Drawing.Point(153, 173);
+            this.CitationNumber.Location = new System.Drawing.Point(192, 172);
             this.CitationNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CitationNumber.Name = "CitationNumber";
             this.CitationNumber.Size = new System.Drawing.Size(99, 15);
@@ -317,7 +158,7 @@
             this.ReleatedReport.AutoSize = true;
             this.ReleatedReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.ReleatedReport.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ReleatedReport.Location = new System.Drawing.Point(249, 173);
+            this.ReleatedReport.Location = new System.Drawing.Point(288, 172);
             this.ReleatedReport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ReleatedReport.Name = "ReleatedReport";
             this.ReleatedReport.Size = new System.Drawing.Size(93, 15);
@@ -329,7 +170,7 @@
             this.Date.AutoSize = true;
             this.Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.Date.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.Date.Location = new System.Drawing.Point(362, 173);
+            this.Date.Location = new System.Drawing.Point(401, 172);
             this.Date.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Date.Name = "Date";
             this.Date.Size = new System.Drawing.Size(36, 15);
@@ -341,7 +182,7 @@
             this.Time.AutoSize = true;
             this.Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.Time.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.Time.Location = new System.Drawing.Point(456, 173);
+            this.Time.Location = new System.Drawing.Point(510, 172);
             this.Time.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Time.Name = "Time";
             this.Time.Size = new System.Drawing.Size(38, 15);
@@ -353,28 +194,19 @@
             this.SuspectLast.AutoSize = true;
             this.SuspectLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.SuspectLast.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.SuspectLast.Location = new System.Drawing.Point(153, 213);
+            this.SuspectLast.Location = new System.Drawing.Point(192, 212);
             this.SuspectLast.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SuspectLast.Name = "SuspectLast";
             this.SuspectLast.Size = new System.Drawing.Size(70, 15);
             this.SuspectLast.TabIndex = 156;
             this.SuspectLast.Text = "Last Name:";
             // 
-            // SuspectFirstBox
-            // 
-            this.SuspectFirstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.SuspectFirstBox.Location = new System.Drawing.Point(365, 230);
-            this.SuspectFirstBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SuspectFirstBox.Name = "SuspectFirstBox";
-            this.SuspectFirstBox.Size = new System.Drawing.Size(170, 21);
-            this.SuspectFirstBox.TabIndex = 157;
-            // 
             // SuspectFirst
             // 
             this.SuspectFirst.AutoSize = true;
             this.SuspectFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.SuspectFirst.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.SuspectFirst.Location = new System.Drawing.Point(362, 213);
+            this.SuspectFirst.Location = new System.Drawing.Point(401, 212);
             this.SuspectFirst.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SuspectFirst.Name = "SuspectFirst";
             this.SuspectFirst.Size = new System.Drawing.Size(70, 15);
@@ -386,7 +218,7 @@
             this.SuspectDOB.AutoSize = true;
             this.SuspectDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.SuspectDOB.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.SuspectDOB.Location = new System.Drawing.Point(153, 253);
+            this.SuspectDOB.Location = new System.Drawing.Point(192, 252);
             this.SuspectDOB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SuspectDOB.Name = "SuspectDOB";
             this.SuspectDOB.Size = new System.Drawing.Size(36, 15);
@@ -398,7 +230,7 @@
             this.SuspectAddress.AutoSize = true;
             this.SuspectAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.SuspectAddress.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.SuspectAddress.Location = new System.Drawing.Point(249, 253);
+            this.SuspectAddress.Location = new System.Drawing.Point(288, 252);
             this.SuspectAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SuspectAddress.Name = "SuspectAddress";
             this.SuspectAddress.Size = new System.Drawing.Size(54, 15);
@@ -410,7 +242,7 @@
             this.OfficerNumber.AutoSize = true;
             this.OfficerNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.OfficerNumber.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.OfficerNumber.Location = new System.Drawing.Point(153, 293);
+            this.OfficerNumber.Location = new System.Drawing.Point(192, 292);
             this.OfficerNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.OfficerNumber.Name = "OfficerNumber";
             this.OfficerNumber.Size = new System.Drawing.Size(93, 15);
@@ -422,7 +254,7 @@
             this.OfficerName.AutoSize = true;
             this.OfficerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.OfficerName.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.OfficerName.Location = new System.Drawing.Point(313, 293);
+            this.OfficerName.Location = new System.Drawing.Point(352, 292);
             this.OfficerName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.OfficerName.Name = "OfficerName";
             this.OfficerName.Size = new System.Drawing.Size(82, 15);
@@ -434,7 +266,7 @@
             this.InfoLabel.AutoSize = true;
             this.InfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
             this.InfoLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.InfoLabel.Location = new System.Drawing.Point(54, 156);
+            this.InfoLabel.Location = new System.Drawing.Point(105, 155);
             this.InfoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(133, 17);
@@ -443,13 +275,58 @@
             // 
             // ProgressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(274, 536);
+            this.ProgressBar.Location = new System.Drawing.Point(313, 529);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(196, 20);
             this.ProgressBar.Step = 5;
             this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.ProgressBar.TabIndex = 181;
-            this.ProgressBar.Value = 50;
+            // 
+            // combo_last
+            // 
+            this.combo_last.FormattingEnabled = true;
+            this.combo_last.Location = new System.Drawing.Point(195, 228);
+            this.combo_last.Name = "combo_last";
+            this.combo_last.Size = new System.Drawing.Size(205, 21);
+            this.combo_last.TabIndex = 182;
+            // 
+            // combo_first
+            // 
+            this.combo_first.FormattingEnabled = true;
+            this.combo_first.Location = new System.Drawing.Point(404, 228);
+            this.combo_first.Name = "combo_first";
+            this.combo_first.Size = new System.Drawing.Size(198, 21);
+            this.combo_first.TabIndex = 183;
+            // 
+            // BackButton
+            // 
+            this.BackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.BackButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.BackButton.Location = new System.Drawing.Point(643, 11);
+            this.BackButton.Margin = new System.Windows.Forms.Padding(2);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(130, 28);
+            this.BackButton.TabIndex = 184;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = true;
+            // 
+            // first_box
+            // 
+            this.first_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.first_box.Location = new System.Drawing.Point(404, 229);
+            this.first_box.Margin = new System.Windows.Forms.Padding(2);
+            this.first_box.Name = "first_box";
+            this.first_box.Size = new System.Drawing.Size(198, 21);
+            this.first_box.TabIndex = 188;
+            // 
+            // last_box
+            // 
+            this.last_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.last_box.Location = new System.Drawing.Point(195, 229);
+            this.last_box.Margin = new System.Windows.Forms.Padding(2);
+            this.last_box.Name = "last_box";
+            this.last_box.Size = new System.Drawing.Size(204, 21);
+            this.last_box.TabIndex = 189;
             // 
             // CitationForm2
             // 
@@ -457,6 +334,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.first_box);
+            this.Controls.Add(this.last_box);
+            this.Controls.Add(this.BackButton);
+            this.Controls.Add(this.combo_first);
+            this.Controls.Add(this.combo_last);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.OfficerName);
@@ -464,29 +346,14 @@
             this.Controls.Add(this.SuspectAddress);
             this.Controls.Add(this.SuspectDOB);
             this.Controls.Add(this.SuspectFirst);
-            this.Controls.Add(this.SuspectFirstBox);
             this.Controls.Add(this.SuspectLast);
             this.Controls.Add(this.Time);
             this.Controls.Add(this.Date);
             this.Controls.Add(this.ReleatedReport);
             this.Controls.Add(this.CitationNumber);
-            this.Controls.Add(this.CurrentStoppedBox4);
-            this.Controls.Add(this.CurrentStoppedBox3);
-            this.Controls.Add(this.CurrentStoppedBox2);
-            this.Controls.Add(this.CurrentStoppedBox1);
-            this.Controls.Add(this.CurrentStoppedLabel);
-            this.Controls.Add(this.MenuLabel5);
-            this.Controls.Add(this.MenuLabel4);
-            this.Controls.Add(this.MenuLabel3);
-            this.Controls.Add(this.MenuLabel2);
-            this.Controls.Add(this.MenuLabel1);
-            this.Controls.Add(this.FiskeyLabel);
-            this.Controls.Add(this.MDTLabel2);
-            this.Controls.Add(this.CitationAutoLookupButton);
             this.Controls.Add(this.CitationContinueButton);
             this.Controls.Add(this.CitationPerpStreetBox);
             this.Controls.Add(this.CitationPerpDOBBox);
-            this.Controls.Add(this.SuspectLastBox);
             this.Controls.Add(this.CitationIssuedOfficerNameBox);
             this.Controls.Add(this.CitationIssuedOfficerBox);
             this.Controls.Add(this.CitationRelatedBox);
@@ -506,35 +373,20 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label MenuLabel5;
-        private System.Windows.Forms.Label MenuLabel4;
-        private System.Windows.Forms.Label MenuLabel3;
-        private System.Windows.Forms.Label MenuLabel2;
-        private System.Windows.Forms.Label MenuLabel1;
-        private System.Windows.Forms.Label FiskeyLabel;
-        private System.Windows.Forms.Label MDTLabel2;
-        private System.Windows.Forms.Button CitationAutoLookupButton;
         private System.Windows.Forms.Button CitationContinueButton;
         private System.Windows.Forms.TextBox CitationPerpStreetBox;
         private System.Windows.Forms.TextBox CitationPerpDOBBox;
-        private System.Windows.Forms.TextBox SuspectLastBox;
         private System.Windows.Forms.TextBox CitationIssuedOfficerNameBox;
         private System.Windows.Forms.TextBox CitationIssuedOfficerBox;
         private System.Windows.Forms.TextBox CitationRelatedBox;
         private System.Windows.Forms.TextBox CitationTimeBox;
         private System.Windows.Forms.TextBox CitationDateBox;
         private System.Windows.Forms.TextBox CitationNumberBox;
-        private System.Windows.Forms.Label CurrentStoppedLabel;
-        private System.Windows.Forms.TextBox CurrentStoppedBox1;
-        private System.Windows.Forms.TextBox CurrentStoppedBox2;
-        private System.Windows.Forms.TextBox CurrentStoppedBox4;
-        private System.Windows.Forms.TextBox CurrentStoppedBox3;
         private System.Windows.Forms.Label CitationNumber;
         private System.Windows.Forms.Label ReleatedReport;
         private System.Windows.Forms.Label Date;
         private System.Windows.Forms.Label Time;
         private System.Windows.Forms.Label SuspectLast;
-        private System.Windows.Forms.TextBox SuspectFirstBox;
         private System.Windows.Forms.Label SuspectFirst;
         private System.Windows.Forms.Label SuspectDOB;
         private System.Windows.Forms.Label SuspectAddress;
@@ -542,5 +394,10 @@
         private System.Windows.Forms.Label OfficerName;
         private System.Windows.Forms.Label InfoLabel;
         private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.ComboBox combo_last;
+        private System.Windows.Forms.ComboBox combo_first;
+        private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.TextBox first_box;
+        private System.Windows.Forms.TextBox last_box;
     }
 }

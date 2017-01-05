@@ -13,117 +13,217 @@ using System.IO;
 using LSPD_First_Response.Engine.Scripting.Entities;
 using Gwen.ControlInternal;
 using System.Drawing;
+using ComputerPlus.Interfaces.ComputerReports;
 
 namespace ComputerPlus
 {
     internal class CitationViolationCode : GwenForm
     {
-        internal static SubmitCheck state;
-
         // Housekeeping
-        private Label FiskeyLabel;
-        private Label MDTLabel2;
-        private Label MenuLabel1;
-        private Label MenuLabel2;
-        private Label MenuLabel3;
-        private Label MenuLabel4;
-        private Label MenuLabel5;
+        private Label FiskeyLabel, MDTLabel2, MenuLabel1, MenuLabel2, MenuLabel3, MenuLabel4, MenuLabel5;
         private ProgressBar ProgressBar;
         private int gen;
         private Vector3 CurrentLocation;
-        internal static Boolean SpeedCheckisChecked;
-        internal static string vehplate;
+        internal static bool SpeedCheckisChecked;
 
         /// <summary>
         /// Citation Section
         /// </summary>
         // Labels
-        private Label InfoLabel;
-        private Label Defendent;
-        private Label Operated;
-        private Label VehInfo;
-        private Label VehPlate;
-        private Label CitationStreet;
-        private Label CitationCity;
-        private Label Conditions;
-        private Label CommittedOffenses;
-        private Label Ina;
-        private Label Ina2;
-        private Label Area;
-        private Label Violations;
-        private Label ExtraInfo;
-        private Label CourtInfo;
-        private Label Fail;
-        private Label CurrentStreet;
+        private Label InfoLabel, Defendent, Operated, VehInfo, VehPlate, CitationStreet, CitationCity, 
+            Conditions, CommittedOffenses, Ina, Ina2, speed_type_lbl, Area, Violations, ExtraInfo, CourtInfo, Fail, CurrentStreet;
         // Boxes
-        private TextBox VehInfoBox;
-        internal TextBox VehPlateBox;
-        private TextBox StreetBox;
-        private TextBox CityBox;
-        private TextBox SpeedBox;
-        private TextBox DateBox;
-        private TextBox TimeBox;
-        private TextBox InABox;
-        private TextBox CurrentStreetBox;
-        private MultilineTextBox CitationViolationBox;
-        private MultilineTextBox CitationExtraInfoBox;
+        private TextBox VehInfoBox, offense_other_box, veh_other_box, VehPlateBox, StreetBox, CityBox, _areaOtherBox, 
+            SpeedBox, InABox;
+        private MultilineTextBox CitationViolationBox, CitationExtraInfoBox, summons_box;
         // Checkboxes
-        private CheckBox VehCheck1;
-        private CheckBox VehCheck2;
-        private CheckBox VehCheck3;
-        private CheckBox VehCheck4;
-        private CheckBox VehCheck5;
-        private CheckBox InCommCheck;
-        private CheckBox InConstCheck;
-        private CheckBox AccidentCheck;
-        internal CheckBox SpeedCheck;
+        private CheckBox VehCheck1, VehCheck2, VehCheck3, VehCheck4, VehCheck5, AccidentCheck, SpeedCheck, offense_other_check;
+
         // Drop-Down Lists
-        private ComboBox CitationAreaBox;
-        private ComboBox CitationWeatherBox;
-        private ComboBox CitationStreetConditionBox;
-        private ComboBox CitationLightConditionBox;
-        private ComboBox CitationTrafficConditionBox;
-        private ComboBox CitationSpeedDeviceBox;
+        private ComboBox CitationAreaBox, CitationWeatherBox, CitationStreetConditionBox, CitationLightConditionBox, CitationTrafficConditionBox, CitationSpeedDeviceBox;
+
+        private bool _BoxCheck1, _BoxCheck2, _BoxCheck3, _BoxCheck4, _BoxCheck5, _BoxCheck6, _BoxCheck7;
+
         // Button
         private Button CitationSubmitButton;
-        private Button BackButton;
 
         public CitationViolationCode()
             : base(typeof(CitationViolationForm))
-        {
-
-        }
+        {  }
 
         public override void InitializeLayout()
         {
             GameFiber.StartNew(delegate
             {
                 base.InitializeLayout();
-                Game.LogTrivial("Initializing Citation Violations");
-                this.Position = new Point(Game.Resolution.Width / 2 - this.Window.Width / 2, Game.Resolution.Height / 2 - this.Window.Height / 2);
-                this.CitationSubmitButton.Clicked += this.OnCitationSubmitClick;
-                this.SpeedCheck.Checked += this.SpeedCheckChecked;
-                BackButton.Clicked += OnBackButtonClick;
-                Ina2.Hide();
-                InABox.Hide();
-                CitationSpeedDeviceBox.Hide();
-                SpeedBox.Hide();
-                gen = Configs.RandomNumber.r.Next(1, 61);
-                string date = DateTime.Now.AddDays(gen).ToShortDateString();
-                DateBox.Text = date;
-                DateTime start = DateTime.Today.AddHours(8);
-                DateTime value = start.AddMinutes(Configs.RandomNumber.r.Next(481));
-                string time = value.ToShortTimeString();
-                TimeBox.Text = time;
-                CurrentLocation = Game.LocalPlayer.Character.Position;
-                string currentstreet = Rage.World.GetStreetName(CurrentLocation);
-                StreetBox.Text = currentstreet;
-                CurrentStreetBox.Text = currentstreet;
+
+                Setup();
+
+                HideThings();
+
+                FillinBoxes();
+
                 VehCheck();
-                state = SubmitCheck.inprogress;
                 GameFiber.Yield();
             });
         }
+
+        private void Setup()
+        {
+            Game.LogTrivial("Initializing Citation Violations");
+            this.Position = new Point(Game.Resolution.Width / 2 - this.Window.Width / 2, Game.Resolution.Height / 2 - this.Window.Height / 2);
+
+            this.CitationSubmitButton.Clicked += OnCitationSubmitClick;
+            this.SpeedCheck.Checked += SpeedCheckChecked;
+            this.SpeedCheck.UnChecked += SpeedCheckUnChecked;
+            this.VehCheck5.Checked += VehCheck5_Checked;
+            this.VehCheck5.UnChecked += VehCheck5_UnChecked;
+            this.offense_other_check.Checked += Offense_other_check_Checked;
+            this.offense_other_check.UnChecked += Offense_other_check_UnChecked;
+            this.CitationWeatherBox.Clicked += ComboBoxClicked;
+            this.CitationStreetConditionBox.Clicked += ComboBoxClicked;
+            this.CitationLightConditionBox.Clicked += ComboBoxClicked;
+            this.CitationTrafficConditionBox.Clicked += ComboBoxClicked;
+            this.CitationAreaBox.Clicked += ComboBoxClicked;
+            this.AccidentCheck.Checked += AccidentCheck_Checked;
+            this.AccidentCheck.UnChecked += AccidentCheck_UnChecked;
+        }
+
+        private void FillinBoxes()
+        {
+            ProgressBar.Value = 0.45f;
+            gen = Configs.RandomNumber.r.Next(1, 61);
+            string date = DateTime.Now.AddDays(gen).ToShortDateString();
+            DateTime start = DateTime.Today.AddHours(8);
+            DateTime value = start.AddMinutes(Configs.RandomNumber.r.Next(481));
+            string time = value.ToShortTimeString();
+            summons_box.Text = date + "\n" + time;
+            CurrentLocation = Game.LocalPlayer.Character.Position;
+            string currentstreet = Rage.World.GetStreetName(CurrentLocation);
+            Game.LogTrivial("5");
+            StreetBox.Text = currentstreet;
+            ExtensionMethods.IncreaseProgressBar(ProgressBar, 0.15f);
+        }
+
+        private void HideThings()
+        {
+            Ina2.Hide();
+            InABox.Hide();
+            speed_type_lbl.Hide();
+            CitationSpeedDeviceBox.Hide();
+            veh_other_box.Hide();
+            offense_other_box.Hide();
+            SpeedBox.Hide();
+            _areaOtherBox.Hide();
+        }
+
+        #region Checkbox_Methods
+        private void AccidentCheck_Checked(Base sender, EventArgs arguments)
+        {
+            ExtensionMethods.IncreaseProgressBar(ProgressBar);
+        }
+        private void AccidentCheck_UnChecked(Base sender, EventArgs arguments)
+        {
+            ExtensionMethods.DecreaseProgressBar(ProgressBar);
+        }
+
+        private void ComboBoxClicked(Base sender, ClickedEventArgs arguments)
+        {
+            if (sender == CitationWeatherBox && !_BoxCheck1)
+            {
+                _BoxCheck1 = true;
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            }
+            else if (sender == CitationStreetConditionBox && !_BoxCheck2)
+            {
+                _BoxCheck2 = true;
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            }
+            else if (sender == CitationLightConditionBox && !_BoxCheck3)
+            {
+                _BoxCheck3 = true;
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            }
+            else if (sender == CitationTrafficConditionBox && !_BoxCheck4)
+            {
+                _BoxCheck4 = true;
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            }
+            else if (sender == CitationWeatherBox && !_BoxCheck5)
+            {
+                _BoxCheck5 = true;
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            }
+            else if (sender == CitationWeatherBox && !_BoxCheck6)
+            {
+                _BoxCheck6 = true;
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            }
+            else if (sender == CitationAreaBox)
+            {
+                if (!_BoxCheck7)
+                {
+                    _BoxCheck7 = true;
+                    ExtensionMethods.IncreaseProgressBar(ProgressBar);
+                }
+                if (CitationAreaBox.SelectedItem.Text == "Other")
+                {
+                    _areaOtherBox.Show();
+                }
+                else
+                {
+                    _areaOtherBox.Hide();
+                }
+            }
+        }
+
+        private void Offense_other_check_UnChecked(Base sender, EventArgs arguments)
+        {
+            offense_other_box.Hide();
+            ExtensionMethods.DecreaseProgressBar(ProgressBar);
+        }
+
+        private void Offense_other_check_Checked(Base sender, EventArgs arguments)
+        {
+            offense_other_box.Show();
+            ExtensionMethods.IncreaseProgressBar(ProgressBar, 0.10f);
+        }
+
+        private void VehCheck5_UnChecked(Base sender, EventArgs arguments)
+        {
+            veh_other_box.Hide();
+            ExtensionMethods.DecreaseProgressBar(ProgressBar);
+        }
+
+        private void VehCheck5_Checked(Base sender, EventArgs arguments)
+        {
+            veh_other_box.Show();
+            ExtensionMethods.IncreaseProgressBar(ProgressBar);
+        }
+
+        private void SpeedCheckUnChecked(Base sender, EventArgs arguments)
+        {
+            ExtensionMethods.DecreaseProgressBar(ProgressBar);
+            Ina2.Hide();
+            InABox.Hide();
+            CitationSpeedDeviceBox.Hide();
+            SpeedBox.Hide();
+            speed_type_lbl.Hide();
+            SpeedCheckisChecked = false;
+        }
+
+        private void SpeedCheckChecked(Base sender, EventArgs arguments)
+        {
+            ExtensionMethods.IncreaseProgressBar(ProgressBar);
+            Ina2.Show();
+            InABox.Show();
+            CitationSpeedDeviceBox.Show();
+            SpeedBox.Show();
+            speed_type_lbl.Show();
+            SpeedCheckisChecked = true;
+        }
+        #endregion
+
         private void VehCheck()
         {
             if (Functions.IsPlayerPerformingPullover() == true)
@@ -131,79 +231,73 @@ namespace ComputerPlus
                 Vehicle[] vehs = World.GetAllVehicles();
                 for (int i = 0; i < vehs.Length; i++)
                 {
-
                     VehPlateBox.Text = vehs[i].LicensePlate;
+                    VehInfoBox.Text = vehs[i].Model.Name.ToString();
                 }
+                ExtensionMethods.IncreaseProgressBar(ProgressBar);
             }
         }
 
-        private void SpeedCheckChecked(Base sender, EventArgs arguments)
+        private void OnCitationSubmitClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
         {
-            Ina2.Show();
-            InABox.Show();
-            CitationSpeedDeviceBox.Show();
-            SpeedBox.Show();
-            SpeedCheckisChecked = true;
+            ProgressBar.Value = 1f;
+
+            WriteInformation();
+
+            CloseForm();
         }
 
-        private void OnCitationSubmitClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
+        private void WriteInformation()
         {
             Game.LogTrivial("Citation page 2 submission begin...");
             using (StreamWriter Information = new StreamWriter("Plugins/LSPDFR/ComputerPlus/citations/completedcitations.txt", true))
             {
                 Information.WriteLine("---VIOLATIONS---");
                 Information.WriteLine("The above defendent operated a:");
-                Information.WriteLine("Passenger: " + VehCheck1.IsChecked);
-                Information.WriteLine("Commercial: " + VehCheck2.IsChecked);
-                Information.WriteLine("Cycle: " + VehCheck3.IsChecked);
-                Information.WriteLine("Bus: " + VehCheck4.IsChecked);
-                Information.WriteLine("Other: " + VehCheck5.IsChecked);
+                if (VehCheck1.IsChecked)
+                    Information.WriteLine("Passenger Vehicle");
+                if (VehCheck2.IsChecked)
+                    Information.WriteLine("Commercial Vehicle");
+                if (VehCheck3.IsChecked)
+                    Information.WriteLine("Cycle");
+                if (VehCheck4.IsChecked)
+                    Information.WriteLine("Service Vehicle");
+                if (VehCheck5.IsChecked)
+                    Information.WriteLine(veh_other_box.Text);
                 Information.WriteLine("Vehicle Make, Model, Color, Style: " + VehInfoBox.Text);
                 Information.WriteLine("License Plate: " + VehPlateBox.Text);
                 Information.WriteLine("Upon the public highway: " + StreetBox.Text + " in the city: " + CityBox.Text);
+                Information.WriteLine("In a: " + Area.Text);
                 Information.WriteLine("In the following conditions:");
-                Information.WriteLine("Street Condition: " + CitationStreetConditionBox.Text);
-                Information.WriteLine("Light Condition: " + CitationLightConditionBox.Text);
-                Information.WriteLine("Traffic Condition: " + CitationTrafficConditionBox.Text);
+                Information.WriteLine("Weather: " + CitationWeatherBox.Text);
+                Information.WriteLine("Street: " + CitationStreetConditionBox.Text);
+                Information.WriteLine("Light: " + CitationLightConditionBox.Text);
+                Information.WriteLine("Traffic: " + CitationTrafficConditionBox.Text);
                 Information.WriteLine("And committed the following offenses:");
-                Information.WriteLine("Accident: " + AccidentCheck.IsChecked);
-                Information.WriteLine("Speed: " + SpeedCheck.IsChecked + " and was traveling " + SpeedBox.Text + " in a speed limit of " + InABox.Text);
-                Information.WriteLine("Speed Device Used: " + CitationSpeedDeviceBox.Text);
-                Information.WriteLine("In a:");
-                Information.WriteLine("Commercial Vehicle: " + InCommCheck.IsChecked);
-                Information.WriteLine("Construction Zone: " + InConstCheck.IsChecked);
-                Information.WriteLine("Area: " + Area.Text);
-                Information.WriteLine("Violations: " + Violations.Text);
-                Information.WriteLine("Additional Information: " + ExtraInfo.Text);
-                Information.WriteLine("And is summoned to appear in court on: " + DateBox.Text + " at " + TimeBox.Text);
+                if (AccidentCheck.IsChecked)
+                    Information.WriteLine("Accident: " + AccidentCheck.IsChecked);
+                if (SpeedCheck.IsChecked)
+                    Information.WriteLine("Speed: " + SpeedCheck.IsChecked + " and was traveling " + SpeedBox.Text + " in a speed limit of " + InABox.Text);
+                if (offense_other_check.IsChecked)
+                    Information.WriteLine("Other: " + offense_other_box.Text);
+                Information.WriteLine("Violations: " + CitationViolationBox.Text);
+                Information.WriteLine("Additional Information: " + CitationExtraInfoBox.Text);
+                Information.WriteLine("And is summoned to appear in court on: " + summons_box.Text);
                 Information.WriteLine(" ");
                 Information.WriteLine("Citation Submitted " + System.DateTime.Now.ToString());
                 Information.WriteLine("---END CITATION---");
             }
             Game.LogTrivial("Citation page 2 submission success!");
-            Game.DisplayNotification("Citation ~b~successfully~w~ submitted!");
-            vehplate = VehPlateBox.Text.ToLower();
-            CitationComplete();
-            state = SubmitCheck.submitted;
-            this.Window.Close();
-            ComputerMain.form_report = new GameFiber(ComputerMain.OpenReportMenuForm);
-            ComputerMain.form_report.Start();
-        }
-        internal static bool CitationComplete()
-        {
-            return true;
         }
 
+        private void CloseForm()
+        {
+            this.Window.Close();
+        }
+        
         private void OnBackButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
         {
             this.Window.Close();
-            ComputerMain.form_report = new GameFiber(ComputerMain.OpenReportMenuForm);
-            ComputerMain.form_report.Start();
-        }
-        internal enum SubmitCheck
-        {
-            submitted,
-            inprogress
         }
     }
 }

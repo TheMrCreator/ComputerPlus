@@ -38,16 +38,21 @@
             this.btn_request = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_activecalls = new System.Windows.Forms.Button();
+            this.label_external_ui = new System.Windows.Forms.Label();
+            this.list_external_ui = new System.Windows.Forms.ComboBox();
+            this.cb_toggle_pause = new System.Windows.Forms.CheckBox();
+            this.cb_toggle_background = new System.Windows.Forms.CheckBox();
+            this.btn_ReportMain = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ped_db
             // 
             this.btn_ped_db.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_ped_db.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_ped_db.Location = new System.Drawing.Point(64, 158);
+            this.btn_ped_db.Location = new System.Drawing.Point(30, 198);
             this.btn_ped_db.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_ped_db.Name = "btn_ped_db";
-            this.btn_ped_db.Size = new System.Drawing.Size(125, 30);
+            this.btn_ped_db.Size = new System.Drawing.Size(113, 30);
             this.btn_ped_db.TabIndex = 0;
             this.btn_ped_db.Text = "Ped Database";
             this.btn_ped_db.UseVisualStyleBackColor = true;
@@ -57,10 +62,10 @@
             // 
             this.btn_veh_db.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_veh_db.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_veh_db.Location = new System.Drawing.Point(193, 158);
+            this.btn_veh_db.Location = new System.Drawing.Point(147, 198);
             this.btn_veh_db.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_veh_db.Name = "btn_veh_db";
-            this.btn_veh_db.Size = new System.Drawing.Size(125, 30);
+            this.btn_veh_db.Size = new System.Drawing.Size(113, 30);
             this.btn_veh_db.TabIndex = 1;
             this.btn_veh_db.Text = "Vehicle Database";
             this.btn_veh_db.UseVisualStyleBackColor = true;
@@ -70,7 +75,7 @@
             // 
             this.btn_logout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_logout.Location = new System.Drawing.Point(258, 194);
+            this.btn_logout.Location = new System.Drawing.Point(258, 234);
             this.btn_logout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_logout.Name = "btn_logout";
             this.btn_logout.Size = new System.Drawing.Size(125, 30);
@@ -96,10 +101,10 @@
             // 
             this.btn_request.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_request.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_request.Location = new System.Drawing.Point(322, 158);
+            this.btn_request.Location = new System.Drawing.Point(264, 198);
             this.btn_request.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_request.Name = "btn_request";
-            this.btn_request.Size = new System.Drawing.Size(125, 30);
+            this.btn_request.Size = new System.Drawing.Size(113, 30);
             this.btn_request.TabIndex = 4;
             this.btn_request.Text = "Request Backup";
             this.btn_request.UseVisualStyleBackColor = true;
@@ -118,20 +123,76 @@
             // 
             this.btn_activecalls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_activecalls.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_activecalls.Location = new System.Drawing.Point(451, 158);
+            this.btn_activecalls.Location = new System.Drawing.Point(381, 198);
             this.btn_activecalls.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btn_activecalls.Name = "btn_activecalls";
-            this.btn_activecalls.Size = new System.Drawing.Size(125, 30);
+            this.btn_activecalls.Size = new System.Drawing.Size(113, 30);
             this.btn_activecalls.TabIndex = 6;
             this.btn_activecalls.Text = "Call Details";
             this.btn_activecalls.UseVisualStyleBackColor = true;
+            // 
+            // label_external_ui
+            // 
+            this.label_external_ui.AutoSize = true;
+            this.label_external_ui.Location = new System.Drawing.Point(79, 164);
+            this.label_external_ui.Name = "label_external_ui";
+            this.label_external_ui.Size = new System.Drawing.Size(36, 13);
+            this.label_external_ui.TabIndex = 7;
+            this.label_external_ui.Text = "Extras";
+            this.label_external_ui.Visible = false;
+            // 
+            // list_external_ui
+            // 
+            this.list_external_ui.FormattingEnabled = true;
+            this.list_external_ui.Location = new System.Drawing.Point(149, 161);
+            this.list_external_ui.Name = "list_external_ui";
+            this.list_external_ui.Size = new System.Drawing.Size(312, 21);
+            this.list_external_ui.TabIndex = 8;
+            this.list_external_ui.Visible = false;
+            // 
+            // cb_toggle_pause
+            // 
+            this.cb_toggle_pause.AutoSize = true;
+            this.cb_toggle_pause.Location = new System.Drawing.Point(520, 232);
+            this.cb_toggle_pause.Name = "cb_toggle_pause";
+            this.cb_toggle_pause.Size = new System.Drawing.Size(92, 17);
+            this.cb_toggle_pause.TabIndex = 9;
+            this.cb_toggle_pause.Text = "Toggle Pause";
+            this.cb_toggle_pause.UseVisualStyleBackColor = true;
+            // 
+            // cb_toggle_background
+            // 
+            this.cb_toggle_background.AutoSize = true;
+            this.cb_toggle_background.Location = new System.Drawing.Point(520, 255);
+            this.cb_toggle_background.Name = "cb_toggle_background";
+            this.cb_toggle_background.Size = new System.Drawing.Size(120, 17);
+            this.cb_toggle_background.TabIndex = 10;
+            this.cb_toggle_background.Text = "Toggle Background";
+            this.cb_toggle_background.UseVisualStyleBackColor = true;
+            // 
+            // btn_ReportMain
+            // 
+            this.btn_ReportMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_ReportMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.btn_ReportMain.Location = new System.Drawing.Point(498, 198);
+            this.btn_ReportMain.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btn_ReportMain.Name = "btn_ReportMain";
+            this.btn_ReportMain.Size = new System.Drawing.Size(113, 30);
+            this.btn_ReportMain.TabIndex = 11;
+            this.btn_ReportMain.Text = "Report Menu";
+            this.btn_ReportMain.UseVisualStyleBackColor = true;
             // 
             // ComputerMainTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(645, 233);
+            this.ClientSize = new System.Drawing.Size(645, 274);
+            this.Controls.Add(this.btn_ReportMain);
+            this.Controls.Add(this.cb_toggle_background);
+            this.Controls.Add(this.cb_toggle_pause);
+            this.Controls.Add(this.list_external_ui);
+            this.Controls.Add(this.label_external_ui);
             this.Controls.Add(this.btn_activecalls);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_request);
@@ -162,5 +223,10 @@
         private Label label1;
         private ListBox list_recent;
         private Button btn_activecalls;
+        private Label label_external_ui;
+        private ComboBox list_external_ui;
+        private CheckBox cb_toggle_pause;
+        private CheckBox cb_toggle_background;
+        private Button btn_ReportMain;
     }
 }

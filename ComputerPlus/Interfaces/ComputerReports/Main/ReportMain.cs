@@ -25,8 +25,6 @@ namespace ComputerPlus
         private Button HomeButton;
         private Label InfoLabel1;
         private Button FIButton;
-        private Button PoliceNotebook;
-        public static GameFiber form_main = new GameFiber(OpenMainMenuForm);
 
         // Report
         private Button ReportCitation;
@@ -46,23 +44,13 @@ namespace ComputerPlus
             this.ReportArrest.Clicked += this.OnReportArrestClick;
             this.ReportCitation.Clicked += this.OnReportCitationClick;
             this.FIButton.Clicked += this.OnFIButtonClick;
-            this.PoliceNotebook.Clicked += this.OnPoliceNotebookClick;
             this.Position = new Point(Game.Resolution.Width / 2 - this.Window.Width / 2, Game.Resolution.Height / 2 - this.Window.Height / 2);
         }
 
-        private static void OpenMainMenuForm()
-        {
-            GwenForm main = new ComputerMain();
-            main.Show();
-            while (main.Window.IsVisible)
-                GameFiber.Yield();
-        }
 
         public void OnHomeButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
         {
             this.Window.Close();
-            form_main = new GameFiber(OpenMainMenuForm);
-            form_main.Start();
         }
 
         private void OnReportCitationClick(Base sender, ClickedEventArgs arguments)
@@ -70,22 +58,33 @@ namespace ComputerPlus
             GameFiber.StartNew(delegate
             {
                 GameFiber.Sleep(0500);
-                Game.LogTrivial("Loading Citation -- Based on SearchForm");
-                GwenForm CitaitonForm = new CitationInformationCode2();
+                Game.LogTrivial("Loading Citation");
+                GwenForm CitaitonForm = new CitationInformationCode();
                 Game.IsPaused = true;
                 CitaitonForm.Show();
                 CitaitonForm.Position = new System.Drawing.Point(500, 250);
                 while (CitaitonForm.Window.IsVisible)
-                {
                     GameFiber.Yield();
-                }
+
                 Game.IsPaused = true;
             });
         }
 
         private void OnReportArrestClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
         {
-            // In progress
+            GameFiber.StartNew(delegate
+            {
+                GameFiber.Sleep(0500);
+                Game.LogTrivial("Loading Arrest Form");
+                GwenForm ArrestForm = new ArrestDataCode();
+                Game.IsPaused = true;
+                ArrestForm.Show();
+                ArrestForm.Position = new System.Drawing.Point(500, 250);
+                while (ArrestForm.Window.IsVisible)
+                    GameFiber.Yield();
+
+                Game.IsPaused = true;
+            });
         }
 
         private void OnFIButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
@@ -93,36 +92,15 @@ namespace ComputerPlus
             GameFiber.StartNew(delegate
             {
                 GameFiber.Sleep(0500);
-                Game.LogTrivial("Loading FIs -- Based on CitationForm");
-                GwenForm FIForm = new FIEnvironmentCode2();
+                Game.LogTrivial("Loading FIs");
+                GwenForm FIForm = new FIEnvironmentCode();
                 Game.IsPaused = true;
                 FIForm.Show();
                 FIForm.Position = new System.Drawing.Point(500, 250);
                 while (FIForm.Window.IsVisible)
-                {
                     GameFiber.Yield();
-                }
 
                 Game.IsPaused = true;
-            });
-        }
-
-        private void OnPoliceNotebookClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
-        {
-            Game.LogTrivial("Loading Police Notebook via MDT");
-            GameFiber.StartNew(delegate
-            {
-                GameFiber.Sleep(0500);
-                Rage.Forms.GwenForm PNotebook = new NotebookCode2();
-                Game.IsPaused = true;
-                PNotebook.Show();
-                PNotebook.Position = new System.Drawing.Point(900, 100);
-                while (PNotebook.Window.IsVisible)
-                {
-                    Game.IsPaused = true;
-                    GameFiber.Yield();
-                }
-                Game.IsPaused = false;
             });
         }
     }

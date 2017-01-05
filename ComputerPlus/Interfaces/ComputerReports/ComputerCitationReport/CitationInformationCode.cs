@@ -13,76 +13,27 @@ using System.IO;
 using LSPD_First_Response.Engine.Scripting.Entities;
 using Gwen.ControlInternal;
 using System.Drawing;
+using ComputerPlus.Interfaces.ComputerReports;
 
 namespace ComputerPlus
 {
     internal class CitationInformationCode : GwenForm
     {
-        internal static string FirstName;
-        internal static string LastName;
-        internal static DateTime BDay;
-        internal static Persona PedPersona;
-        internal static Persona PedPersona1;
-        internal static Persona PedPersona2;
-        internal static Persona PedPersona3;
-        internal static Persona PedPersona4;
-        internal static string PedName1;
-        internal static string PedName2;
-        internal static string PedName3;
-        internal static string PedName4;
-        internal static string PedName5;
-        internal string first;
-        internal string last;
-        internal static string firstname;
-        internal static string lastname;
-
-        // Housekeeping
-        private Label FiskeyLabel;
-        private Label MDTLabel2;
-        private Label MenuLabel1;
-        private Label MenuLabel2;
-        private Label MenuLabel3;
-        private Label MenuLabel4;
-        private Label MenuLabel5;
         private ProgressBar ProgressBar;
+
         internal static GameFiber form_citationviolation = new GameFiber(OpenCitationViolationForm);
 
-        /// <summary>
-        /// Citation Section
-        /// </summary>
-        // Labels
-        private Label InfoLabel;
-        private Label CitationNumber;
-        private Label RelatedReport;
-        private Label Date;
-        private Label Time;
-        private Label SuspectLast;
-        private Label SuspectFirst;
-        private Label SuspectDOB;
-        private Label SuspectAddress;
-        private Label OfficerNumber;
-        private Label OfficerName;
-        // Boxes
-        private TextBox CitationNumberBox;
-        private TextBox CitationDateBox;
-        private TextBox CitationTimeBox;
-        private TextBox CitationRelatedBox;
-        private TextBox CitationIssuedOfficerBox;
-        private TextBox CitationIssuedOfficerNameBox;
-        private TextBox CitationStreetInfoBox;
-        private TextBox CitationSpeedBox;
-        internal TextBox SuspectLastBox;
-        internal TextBox SuspectFirstBox;
-        private TextBox CitationPerpDOBBox;
-        private TextBox CitationPerpStreetBox;
-        internal TextBox CurrentStoppedBox1;
-        internal TextBox CurrentStoppedBox2;
-        internal TextBox CurrentStoppedBox3;
-        internal TextBox CurrentStoppedBox4;
-        // Button
-        private Button CitationContinueButton;
-        private Button CitationAutoLookupButton;
-        private Button BackButton;
+        private Label InfoLabel, CitationNumber, RelatedReport, Date, Time, 
+            SuspectLast, SuspectFirst, SuspectDOB, SuspectAddress, OfficerNumber, OfficerName;
+
+        private TextBox CitationNumberBox, CitationDateBox, CitationTimeBox, CitationRelatedBox, CitationIssuedOfficerBox,
+            CitationIssuedOfficerNameBox, CitationStreetInfoBox, CitationSpeedBox, CitationPerpDOBBox, CitationPerpStreetBox, last_box, first_box;
+
+        private ComboBox combo_last, combo_first;
+
+        private Button CitationContinueButton, BackButton;
+
+        private bool isPullover = false, ComboBox = false;
 
         public CitationInformationCode()
             : base(typeof(CitationForm2))
@@ -97,100 +48,227 @@ namespace ComputerPlus
                 base.InitializeLayout();
                 Game.LogTrivial("Initializing Citation Information");
                 this.Position = new Point(Game.Resolution.Width / 2 - this.Window.Width / 2, Game.Resolution.Height / 2 - this.Window.Height / 2);
-                this.CitationAutoLookupButton.Clicked += this.OnCitationAutoLookupClick;
-                this.CitationContinueButton.Clicked += this.OnCitationContinueClick;
-                BackButton.Clicked += OnBackButtonClick;
-                CitationDateBox.Text = DateTime.Now.ToShortDateString();
-                CitationTimeBox.Text = DateTime.Now.ToShortTimeString();
-                int l = Configs.RandomNumber.r.Next(1, 14000);
-                CitationNumberBox.Text = l.ToString("D5");
-                CitationIssuedOfficerNameBox.Text = Configs.OfficerName;
-                CitationIssuedOfficerBox.Text = Configs.OfficerNumber;
+
+                MethodStart();
+
+                HideStuff();
+
+                BoxFill();
+
                 PedCheck();
+
+                if (!ComboBox)
+                {
+                    NoComboBox();
+                }
+
                 GameFiber.Yield();
             });
         }
 
-        internal void PedCheck()
+        private void MethodStart()
+        {
+            this.BackButton.Clicked += OnBackButtonClick;
+            this.CitationContinueButton.Clicked += OnCitationContinueClick;
+            this.combo_first.ItemSelected += AddtoProgressBarSelected;
+            this.combo_first.ItemSelected += UpdateInformation;
+            this.combo_last.ItemSelected += AddtoProgressBarSelected;
+            this.combo_last.ItemSelected += UpdateInformation;
+            this.first_box.TextChanged += UpdateInformation;
+            this.last_box.TextChanged += UpdateInformation;
+            this.CitationPerpDOBBox.TextChanged += AddtoProgressBarText;
+            this.CitationPerpStreetBox.TextChanged += AddtoProgressBarText;
+            this.CitationIssuedOfficerBox.TextChanged += AddtoProgressBarText;
+            this.CitationIssuedOfficerNameBox.TextChanged += AddtoProgressBarText;
+        }
+
+        private void HideStuff()
+        {
+            combo_first.Hide();
+            combo_last.Hide();
+            first_box.Hide();
+            last_box.Hide();
+        }
+
+        private void BoxFill()
+        {
+            CitationDateBox.Text = DateTime.Now.ToShortDateString();
+            CitationTimeBox.Text = DateTime.Now.ToShortTimeString();
+            int l = Configs.RandomNumber.r.Next(1, 14000);
+            CitationNumberBox.Text = l.ToString("D5");
+            CitationIssuedOfficerNameBox.Text = Configs.OfficerName;
+            CitationIssuedOfficerBox.Text = Configs.OfficerNumber;
+            ProgressBar.Value = 0;
+            ExtensionMethods.IncreaseProgressBar(ProgressBar, 0.15f);
+        }
+        
+        private void AddtoProgressBarText (Base sender, EventArgs arguments)
+        {
+            ExtensionMethods.IncreaseProgressBar(ProgressBar);
+        }
+
+        private void AddtoProgressBarSelected(Base sender, ItemSelectedEventArgs arguments)
+        {
+            ExtensionMethods.IncreaseProgressBar(ProgressBar);
+        }
+
+        private void PedCheck()
         {
             if (Functions.IsPlayerPerformingPullover() == true)
             {
+                isPullover = true;
                 LHandle pullover = Functions.GetCurrentPullover();
                 Ped pulloverped = Functions.GetPulloverSuspect(pullover);
                 if (pulloverped.Exists())
                 {
                     Persona pers = Functions.GetPersonaForPed(pulloverped);
-                    SuspectFirstBox.Text = pers.Forename.ToString();
-                    SuspectLastBox.Text = pers.Surname.ToString();
+                    combo_first.AddItem(pers.Forename.ToString(), pers.Forename.ToString());
+                    combo_last.AddItem(pers.Surname.ToString(), pers.Surname.ToString());
+                    combo_first.Show();
+                    combo_last.Show();
+                    UpdateInfo(pers);
+                    ComboBox = true;
                 }
             }
 
-            foreach (Ped ped in World.GetAllPeds())
+            if (!isPullover)
             {
-                if (ped.Exists())
+                foreach (Ped ped in World.GetAllPeds())
                 {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true)
+                    if (ped.Exists())
                     {
-                        PedPersona1 = pers;
-                        CurrentStoppedBox1.Text = pers.FullName;
-                    }
-                }
-            }
-            foreach (Ped ped in World.GetAllPeds())
-            {
-                if (ped.Exists())
-                {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true && pers.FullName != PedPersona1.FullName)
-                    {
-                        PedPersona2 = pers;
-                        CurrentStoppedBox2.Text = pers.FullName;
-                    }
-                }
-            }
-            foreach (Ped ped in World.GetAllPeds())
-            {
-                if (ped.Exists())
-                {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedStoppedByPlayer(ped) == true && pers.FullName != PedPersona1.FullName && pers.FullName != PedPersona2.FullName)
-                    {
-                        PedPersona3 = pers;
-                        CurrentStoppedBox3.Text = pers.FullName;
-                    }
-                }
-            }
-            foreach (Ped ped in World.GetAllPeds())
-            {
-                if (ped.Exists())
-                {
-                    Persona pers = Functions.GetPersonaForPed(ped);
-                    if (Functions.IsPedGettingArrested(ped) == true || Functions.IsPedArrested(ped))
-                    {
-                        CurrentStoppedBox4.Text = pers.FullName;
+                        Persona pers = Functions.GetPersonaForPed(ped);
+                        if (Functions.IsPedStoppedByPlayer(ped) == true)
+                        {
+                            combo_first.AddItem(pers.Forename.ToString(), pers.Forename.ToString());
+                            combo_last.AddItem(pers.Surname.ToString(), pers.Surname.ToString());
+                            combo_first.Show();
+                            combo_last.Show();
+                            ComboBox = true;
+                        }
                     }
                 }
             }
         }
 
-        private void OnCitationAutoLookupClick(Base sender, ClickedEventArgs arguments)
+        private void NoComboBox()
+        {
+            first_box.Show();
+            last_box.Show();
+        }
+
+        private void UpdateInformation(Base sender, EventArgs arguments)
         {
             foreach (Ped ped in World.GetAllPeds())
             {
                 if (ped.Exists())
                 {
                     Persona pers = Functions.GetPersonaForPed(ped);
-                    if (pers.FullName.ToLower() == SuspectFirstBox.Text.ToLower() + " " + SuspectLastBox.Text.ToLower())
+                    if (sender == combo_last)
                     {
-                        PedPersona = pers;
-                        BDay = PedPersona.BirthDay;
-                        break;
+                        if (pers.Surname.ToLower() == combo_last.SelectedItem.Text.ToLower())
+                        {
+                            Game.LogTrivial("Match found -- changing first name");
+                            combo_first.Text = pers.Forename;
+                            UpdateInfo(pers);
+                            break;
+                        }
+                    }
+                    else if (sender == combo_first)
+                    {
+                        if (pers.Forename.ToLower() == combo_first.SelectedItem.Text.ToLower())
+                        {
+                            Game.LogTrivial("Match found -- changing last name");
+                            combo_last.Text = pers.Surname;
+                            UpdateInfo(pers);
+                            break;
+                        }
+                    }
+                    else if (sender == last_box)
+                    {
+                        if (pers.Surname.ToLower() == combo_last.SelectedItem.Text.ToLower())
+                        {
+                            Game.LogTrivial("Match found -- changing first name");
+                            first_box.Text = pers.Forename;
+                            UpdateInfo(pers);
+                            break;
+                        }
+                    }
+                    else if (sender == first_box)
+                    {
+                        if (pers.Forename.ToLower() == combo_first.SelectedItem.Text.ToLower())
+                        {
+                            Game.LogTrivial("Match found -- changing last name");
+                            last_box.Text = pers.Surname;
+                            UpdateInfo(pers);
+                            break;
+                        }
                     }
                 }
             }
-            CitationPerpDOBBox.Text = BDay.ToShortDateString();
+        }
 
+        private void UpdateInfo(Persona persona)
+        {
+            CitationPerpDOBBox.Text = persona.BirthDay.ToShortDateString();
+
+            CitationPerpStreetBox.Text = GetRandomAddress();
+        }
+        
+        private void OnCitationContinueClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
+        {
+            WriteData();
+            
+            this.Window.Close();
+            form_citationviolation = new GameFiber(OpenCitationViolationForm);
+            form_citationviolation.Start();
+        }
+
+        private void WriteData()
+        {
+            Game.LogTrivial("Citation page 1 submission begin...");
+            using (StreamWriter Information = new StreamWriter("Plugins/LSPDFR/ComputerPlus/citations/completedcitations.txt", true))
+            {
+                Information.WriteLine(" ");
+                Information.WriteLine(" ");
+                Information.WriteLine("---INFORMATION---");
+                Information.WriteLine("Citation Number: " + CitationNumberBox.Text);
+                Information.WriteLine("Related Report Number: " + CitationRelatedBox.Text);
+                Information.WriteLine("Date of incident: " + CitationDateBox.Text);
+                Information.WriteLine("Time of incident: " + CitationTimeBox.Text);
+                if (!ComboBox)
+                {
+                    Information.WriteLine("Individual Full Name: " + first_box.Text + " " + last_box.Text);
+                }
+                else
+                {
+                    Information.WriteLine("Individual Full Name: " + combo_first.Text + " " + combo_last.Text);
+                }
+                Information.WriteLine("Offender DOB: " + CitationPerpDOBBox.Text);
+                Information.WriteLine("Offender Residence: " + CitationPerpStreetBox.Text);
+                Information.WriteLine("Issuing Officer #: " + CitationIssuedOfficerBox.Text);
+                Information.WriteLine("Issuing Officer Name: " + CitationIssuedOfficerNameBox.Text);
+            }
+            Game.LogTrivial("Citation page 1 submission success!");
+        }
+
+        private bool susFound = false;
+
+        private static void OpenCitationViolationForm()
+        {
+            GwenForm CitationViolation = new CitationViolationCode();
+            CitationViolation.Show();
+            while (CitationViolation.Window.IsVisible)
+                GameFiber.Yield();
+        }
+
+        private void OnBackButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
+        {
+            this.Window.Close();
+        }
+
+        private string GetRandomAddress()
+        {
             int PerpNumber = Configs.RandomNumber.r.Next(1, 1200);
 
             List<string> PerpAddress = new List<string>();
@@ -231,55 +309,7 @@ namespace ComputerPlus
 
             int PerpStreet = Configs.RandomNumber.r.Next(PerpAddress.Count);
 
-            CitationPerpStreetBox.Text = PerpNumber.ToString("D4") + " " + (string)PerpAddress[PerpStreet];
-        }
-
-        private void OnCitationContinueClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
-        {
-            Check();
-            Game.LogTrivial("Citation page 1 submission begin...");
-            using (StreamWriter Information = new StreamWriter("Plugins/LSPDFR/ComputerPlus/citations/completedcitations.txt", true))
-            {
-                Information.WriteLine(" ");
-                Information.WriteLine(" ");
-                Information.WriteLine("---INFORMATION---");
-                Information.WriteLine("Citation Number: " + CitationNumberBox.Text);
-                Information.WriteLine("Related Report Number: " + CitationRelatedBox.Text);
-                Information.WriteLine("Date of incident: " + CitationDateBox.Text);
-                Information.WriteLine("Time of incident: " + CitationTimeBox.Text);
-                Information.WriteLine("Offender Full Name: " + SuspectFirstBox.Text + " " + SuspectLastBox.Text);
-                Information.WriteLine("Offender DOB: " + CitationPerpDOBBox.Text);
-                Information.WriteLine("Offender Residence: " + CitationPerpStreetBox.Text);
-                Information.WriteLine("Issuing Officer #: " + CitationIssuedOfficerBox.Text);
-                Information.WriteLine("Issuing Officer Name: " + CitationIssuedOfficerNameBox.Text);
-            }
-            Game.LogTrivial("Citation page 1 submission success!");
-            Game.DisplayNotification("Citation page 1 of 2 complete...");
-
-            this.Window.Close();
-            form_citationviolation = new GameFiber(OpenCitationViolationForm);
-            form_citationviolation.Start();
-        }
-
-        internal void Check()
-        {
-            firstname = SuspectFirstBox.Text.ToLower();
-            lastname = SuspectLastBox.Text.ToLower();
-        }
-
-        internal static void OpenCitationViolationForm()
-        {
-            GwenForm CitationViolation = new CitationViolationCode();
-            CitationViolation.Show();
-            while (CitationViolation.Window.IsVisible)
-                GameFiber.Yield();
-        }
-
-        private void OnBackButtonClick(Gwen.Control.Base sender, Gwen.Control.ClickedEventArgs e)
-        {
-            this.Window.Close();
-            ComputerMain.form_report = new GameFiber(ComputerMain.OpenReportMenuForm);
-            ComputerMain.form_report.Start();
+            return PerpNumber.ToString("D4") + " " + (string)PerpAddress[PerpStreet];
         }
     }
 }
