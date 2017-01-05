@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rage;
+using System.Windows.Forms;
 
 namespace ComputerPlus
 {
@@ -67,7 +68,7 @@ namespace ComputerPlus
             get { return unit; }
         }
 
-        /*public static Keys NotebookKey { get { return ini_file.ReadEnum<Keys>("General", "NotebookKey", Keys.D2); } }
+        public static Keys NotebookKey { get { return ini_file.ReadEnum<Keys>("General", "NotebookKey", Keys.D2); } }
         public static Keys NotebookKeyModifier { get { return ini_file.ReadEnum<Keys>("General", "NotebookKeyModifier", Keys.LControlKey); } }
 
         public static class RandomNumber
@@ -76,6 +77,6 @@ namespace ComputerPlus
         }
 
         public static string OfficerNumber { get { return ini_file.ReadString("Officer Information", "Officer Number", "1-Adam-12"); } }
-        public static string OfficerName { get { return ini_file.ReadString("Officer Information", "Officer Name", "Pete Malloy"); } }*/
+        public static string OfficerName { get { return ini_file.ReadString("Officer Information", "Officer Name", "Pete Malloy"); } }
     }
 }
